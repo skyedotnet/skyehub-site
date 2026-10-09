@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -272,36 +273,55 @@ footer {
 <script>
 'use strict';
 
-/*
- * SkyeHub Maps API
- *
- * GET  /api/maps
- * GET  /api/maps/{id}/file
- * POST /api/maps/downloaded/{id}
- *
- * The API must allow requests from your website's origin through CORS.
- */
 const MONKE_API = 'https://skyehub-api.bbruhvr1009.workers.dev/api';
 
+/*
+ * These image files should be placed beside maps.html.
+ * Filenames must match exactly, including capitalization.
+ */
 const MONKE_PREVIEWS = {
+  'Pangwen Super Mario 64 Minecraft': 'SM64.png',
+  'Super Mario 64 Minecraft': 'SM64.png',
+
+  "Whomp's Fortress": "Whomp's Fortress.png",
+
+  'Volcano': 'Volcano.png',
+
+  'Toastyyy Rainbow Road (MK64)': 'RainbowRoad.png',
+  'Rainbow Road (MK64)': 'RainbowRoad.png',
+
+  'SpenceOtron 3DS - Kokiri Forest': 'Kokiri.png',
+  '3DS - Kokiri Forest': 'Kokiri.png',
+
+  'RedBrumbler Cool Cool Mountain SM64DS': 'Cool Cool Mountains.png',
+  'Cool Cool Mountain SM64DS': 'Cool Cool Mountains.png',
+
+  'Realistic Noob BrickBattle': 'BrickBattle.png',
+  'BrickBattle': 'BrickBattle.png',
+
+  'New York City': 'NYC.png',
+
+  'NachoEngine MonkeTemplMap V1.0': 'MonkeTemplMap.png',
+  'MonkeTemplMap_V1.0': 'MonkeTemplMap.png',
+
   'Minecraft-New World': 'MinecraftNewWorld.png',
   'Minecraft New World': 'MinecraftNewWorld.png',
-  'Bikini Bottom - SpongeBob': 'BikiniBottom.png',
-  'ISS': 'ISS.png',
-  'New York City': 'NYC.png',
-  'Super Mario 64 Minecraft': 'SM64.png',
-  "Whomp's Fortress": "Whomp's Fortress.png",
-  'Rainbow Road (MK64)': 'RainbowRoad.png',
-  'Cool Cool Mountain SM64DS': 'Cool Cool Mountains.png',
-  'Volcano': 'Volcano.png',
-  'gkz_beginnerblock': 'BeginnerBlock.png',
-  'Sword Fights on The Heights': 'SFOTH.png',
-  '3DS - Kokiri Forest': 'Kokiri.png',
-  'BrickBattle': 'BrickBattle.png',
+
   'Lost Woods': 'LostWoods.png',
-  'gt_deadforest': 'deadforest.png',
+
+  'kpmaxo Sword Fights on The Heights': 'SFOTH.png',
+  'Sword Fights on The Heights': 'SFOTH.png',
+
+  'ISS': 'ISS.png',
+
+  'gkz beginnerblock': 'BeginnerBlock.png',
+  'gkz_beginnerblock': 'BeginnerBlock.png',
+
+  'Erik151515 Bikini Bottom - SpongeBob': 'BikiniBottom.png',
+  'Bikini Bottom - SpongeBob': 'BikiniBottom.png',
+
   'Dead Forest': 'deadforest.png',
-  'MonkeTemplMap_V1.0': 'MonkeTemplMap.png'
+  'gt_deadforest': 'deadforest.png'
 };
 
 let MONKE_MAPS = [];
@@ -336,19 +356,21 @@ function monkeFormatNumber(value) {
 }
 
 function monkePreviewFor(map) {
-  if (map.preview_url || map.image || map.previewUrl) {
-    return monkeSafeUrl(map.preview_url || map.image || map.previewUrl);
+  const previewUrl =
+    map.MapPreviewUrl ||
+    map.preview_url ||
+    map.image ||
+    map.previewUrl;
+
+  if (previewUrl) {
+    return monkeSafeUrl(previewUrl);
   }
 
-  const name = String(map.name || '');
+  const name = String(map.name || map.MapName || '');
   const filename = MONKE_PREVIEWS[name];
 
-  if (!filename) return '';
-
-  // Preview images are expected to live alongside maps.html.
-  return monkeSafeUrl(filename);
+  return filename ? monkeSafeUrl(filename) : '';
 }
-
 
 function monkeNormalizeMap(raw) {
   const map = raw && typeof raw === 'object' ? raw : {};
@@ -383,7 +405,7 @@ function monkeNormalizeMap(raw) {
   const updatedAt =
     map.MapDateUpdated ?? map.updated_at ?? '';
 
-  return {
+  const normalized = {
     id: String(id),
     name: String(name),
     creator: String(creator),
@@ -392,14 +414,18 @@ function monkeNormalizeMap(raw) {
     date: createdAt || updatedAt,
     fileSize: Number(fileSize) || 0,
     fileUrl: String(fileUrl),
-    image: monkePreviewFor({
-      ...map,
-      id: String(id),
-      name: String(name),
-      preview_url: previewUrl,
-      file_url: fileUrl
-    })
+    image: ''
   };
+
+  normalized.image = monkePreviewFor({
+    ...map,
+    id: normalized.id,
+    name: normalized.name,
+    preview_url: previewUrl,
+    file_url: fileUrl
+  });
+
+  return normalized;
 }
 
 async function monkeApiRequest(path, options = {}) {
@@ -436,7 +462,6 @@ async function loadMonkeMaps() {
     const response = await monkeApiRequest('/maps');
     const result = await response.json();
 
-    // Support the API's documented response shape and common alternatives.
     const maps =
       result?.Data?.Maps ??
       result?.data?.maps ??
@@ -446,7 +471,9 @@ async function loadMonkeMaps() {
       (Array.isArray(result?.data) ? result.data : null);
 
     if (result?.Success === false || result?.success === false) {
-      throw new Error(result?.Message || result?.message || 'The API returned an error.');
+      throw new Error(
+        result?.Message || result?.message || 'The API returned an error.'
+      );
     }
 
     if (!Array.isArray(maps)) {
@@ -464,6 +491,7 @@ async function loadMonkeMaps() {
     $('monke-empty-title').textContent = 'Could not load maps';
     $('monke-empty-text').textContent =
       'The SkyeHub API could not be reached. Check your connection and try again. If this keeps happening, check the API CORS settings.';
+
     empty.hidden = false;
     retry.hidden = false;
   } finally {
@@ -507,10 +535,12 @@ function renderMonkeMaps() {
   if (!filtered.length) {
     $('monke-empty-title').textContent =
       MONKE_MAPS.length ? 'No maps found' : 'No maps available';
+
     $('monke-empty-text').textContent =
       MONKE_MAPS.length
         ? 'Try a different search term.'
         : 'There are currently no published maps in the catalogue.';
+
     $('monke-retry').hidden = MONKE_MAPS.length > 0;
     return;
   }
@@ -526,11 +556,13 @@ function renderMonkeMaps() {
       image.src = map.image;
       image.alt = `${map.name} preview`;
       image.loading = 'lazy';
+
       image.onerror = () => {
         image.removeAttribute('src');
         image.alt = 'Preview unavailable';
         image.style.display = 'none';
       };
+
       card.appendChild(image);
     }
 
@@ -540,10 +572,19 @@ function renderMonkeMaps() {
     content.appendChild(monkeText('h3', '', map.name));
     content.appendChild(monkeText('div', 'monke-meta', `By ${map.creator}`));
     content.appendChild(
-      monkeText('div', 'monke-meta', `${monkeFormatNumber(map.downloads)} downloads`)
+      monkeText(
+        'div',
+        'monke-meta',
+        `${monkeFormatNumber(map.downloads)} downloads`
+      )
     );
 
-    const detailsButton = monkeText('button', 'monke-button secondary', 'View details');
+    const detailsButton = monkeText(
+      'button',
+      'monke-button secondary',
+      'View details'
+    );
+
     detailsButton.type = 'button';
     detailsButton.addEventListener('click', () => showMonkeDetails(map));
     content.appendChild(detailsButton);
@@ -568,12 +609,14 @@ function showMonkeDetails(map) {
   $('monke-detail-creator').textContent = `Creator: ${map.creator}`;
   $('monke-detail-downloads').textContent =
     `${monkeFormatNumber(map.downloads)} downloads`;
+
   $('monke-detail-description').textContent =
     map.description || 'No description provided.';
 
   if (map.image) {
     image.src = map.image;
     image.hidden = false;
+
     image.onerror = () => {
       image.hidden = true;
       image.removeAttribute('src');
@@ -598,7 +641,7 @@ function closeMonkeDetails() {
 async function downloadMonkeMap(map) {
   if (!map || !map.id) {
     $('monke-detail-status').textContent =
-      'This map is missing its API ID, so it cannot be downloaded through SkyeHub.';
+      'This map is missing its API ID, so it cannot be downloaded.';
     return;
   }
 
@@ -609,8 +652,7 @@ async function downloadMonkeMap(map) {
   status.textContent = 'Preparing your download...';
 
   try {
-    // Count the download when supported. A counter failure should not
-    // prevent an attempt to download the actual map file.
+    // Increment the counter. Failure here must not block the file download.
     try {
       await monkeApiRequest(
         `/maps/downloaded/${encodeURIComponent(map.id)}`,
@@ -621,6 +663,7 @@ async function downloadMonkeMap(map) {
     }
 
     const fileUrl = monkeSafeUrl(
+      map.fileUrl ||
       `${MONKE_API}/maps/${encodeURIComponent(map.id)}/file`
     );
 
@@ -628,15 +671,43 @@ async function downloadMonkeMap(map) {
       throw new Error('The download URL is invalid.');
     }
 
-    status.textContent = 'Opening your download...';
+    status.textContent = 'Downloading map...';
 
-    // Navigate to the API's file endpoint. The browser handles the file
-    // according to the response headers returned by the Worker.
-    window.location.assign(fileUrl);
+    const response = await fetch(fileUrl);
+
+    if (!response.ok) {
+      throw new Error(`File download failed (${response.status}).`);
+    }
+
+    const blob = await response.blob();
+
+    // Preserve the map name and use .gtmap exactly once.
+    // No SkyeHub prefix or branding is added to the filename.
+    const baseName = String(map.name || 'map')
+      .replace(/\.gtmap$/i, '')
+      .replace(/[<>:"/\\|?*\x00-\x1F]/g, '_')
+      .replace(/[. ]+$/g, '')
+      .trim() || 'map';
+
+    const filename = `${baseName}.gtmap`;
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = blobUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+
+    status.textContent = `Downloaded ${filename}`;
   } catch (error) {
     console.error('Map download failed:', error);
+
     status.textContent =
-      'Download failed. The map may be unavailable or the API may be having trouble.';
+      'Download failed. Check the API connection and CORS settings.';
+  } finally {
     button.disabled = false;
   }
 }
@@ -645,8 +716,11 @@ $('monke-search').addEventListener('input', renderMonkeMaps);
 $('monke-sort').addEventListener('change', renderMonkeMaps);
 $('monke-retry').addEventListener('click', loadMonkeMaps);
 $('monke-detail-close').addEventListener('click', closeMonkeDetails);
+
 $('monke-detail-download').addEventListener('click', () => {
-  if (MONKE_SELECTED_MAP) downloadMonkeMap(MONKE_SELECTED_MAP);
+  if (MONKE_SELECTED_MAP) {
+    downloadMonkeMap(MONKE_SELECTED_MAP);
+  }
 });
 
 loadMonkeMaps();
