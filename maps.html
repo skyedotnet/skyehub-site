@@ -349,28 +349,55 @@ function monkePreviewFor(map) {
   return monkeSafeUrl(filename);
 }
 
+
 function monkeNormalizeMap(raw) {
   const map = raw && typeof raw === 'object' ? raw : {};
 
-  const name = map.map_name || map.name || 'Untitled map';
+  const name =
+    map.MapName || map.map_name || map.name || 'Untitled map';
+
   const creator =
-    map.author_name ||
-    map.creator ||
-    map.author ||
-    'Unknown creator';
+    map.AuthorName || map.author_name ||
+    map.creator || map.author || 'Unknown creator';
+
+  const id = map.MapGuid ?? map.id ?? '';
+
+  const description =
+    map.MapDescription ?? map.description ?? '';
+
+  const downloads =
+    map.MapDownloadCount ?? map.download_count ?? map.downloads ?? 0;
+
+  const fileSize =
+    map.MapFileSize ?? map.file_size ?? 0;
+
+  const fileUrl =
+    map.MapFileUrl ?? map.file_url ?? '';
+
+  const previewUrl =
+    map.MapPreviewUrl ?? map.preview_url ?? '';
+
+  const createdAt =
+    map.MapDateCreated ?? map.created_at ?? '';
+
+  const updatedAt =
+    map.MapDateUpdated ?? map.updated_at ?? '';
 
   return {
-    id: map.id == null ? '' : String(map.id),
+    id: String(id),
     name: String(name),
     creator: String(creator),
-    downloads: Number(map.download_count ?? map.downloads ?? 0) || 0,
-    description: String(map.description || ''),
-    date: map.created_at || map.updated_at || map.date || '',
-    fileSize: Number(map.file_size || 0),
+    downloads: Number(downloads) || 0,
+    description: String(description),
+    date: createdAt || updatedAt,
+    fileSize: Number(fileSize) || 0,
+    fileUrl: String(fileUrl),
     image: monkePreviewFor({
       ...map,
-      name,
-      preview_url: map.preview_url || map.previewUrl || map.image
+      id: String(id),
+      name: String(name),
+      preview_url: previewUrl,
+      file_url: fileUrl
     })
   };
 }
