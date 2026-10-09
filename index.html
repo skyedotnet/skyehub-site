@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Skye's Wiki!" />
-<meta property="og:description" content="The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start." />
+<meta property="og:title" content="skyehub :3" />
+<meta property="og:description" content="BLEHHHHHHHH" />
 <meta property="og:url" content="https://www.skyehub.org" />
 <meta name="theme-color" content="#6a20a0" />
 <title>SkyeHub :3</title>
@@ -297,6 +297,22 @@ hr { height: 1px; color: #4a4a4a; background-color: #4a4a4a; border: 0; margin: 
 }
 #photopea-loading.hidden { opacity: 0; }
 
+#discord-widget-wrap {
+  position: fixed;
+  bottom: 1.2em;
+  left: 1.2em;
+  z-index: 100;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  line-height: 0;
+}
+#discord-widget-wrap iframe {
+  width: 260px;
+  height: 345px;
+}
+@media screen and (max-width: 550px) {
+  #discord-widget-wrap { display: none; }
+}
+
 @media screen and (min-width: 551px) {
   #column-content { float: right; margin: 0 0 0.6em -12.2em; }
   .mw-body { margin: 2.8em 0 0 12.2em; border-right: 0; }
@@ -361,29 +377,6 @@ hr { height: 1px; color: #4a4a4a; background-color: #4a4a4a; border: 0; margin: 
   0%, 50% { background-color: #c00; }
   50.01%, 100% { background-color: #800; }
 }
-
-
-.monke-hub { font-family: sans-serif; margin-top: 1em; }
-.monke-toolbar { display:flex; flex-wrap:wrap; gap:8px; margin:1em 0; }
-.monke-toolbar input,.monke-toolbar select { box-sizing:border-box; min-width:0; padding:9px; color:#e8e8e8; background:#181818; border:1px solid #4a4a4a; border-radius:3px; }
-.monke-toolbar input { flex:1 1 220px; }
-.monke-toolbar select { flex:0 1 180px; }
-.monke-summary { color:#a8a8a8; font-size:90%; margin:.8em 0; }
-.monke-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); gap:12px; margin-top:1em; }
-.monke-card { min-width:0; overflow:hidden; background:#181818; border:1px solid #3a3a3a; border-radius:5px; }
-.monke-card img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#252525; border-bottom:1px solid #3a3a3a; }
-.monke-card-content { padding:10px; }
-.monke-card h3 { margin:0 0 6px; overflow-wrap:anywhere; color:#e8e8e8; font-size:115%; }
-.monke-meta { color:#a8a8a8; font-size:90%; overflow-wrap:anywhere; }
-.monke-button { display:inline-block; padding:7px 11px; margin:5px 5px 0 0; color:#fff !important; background:#512078; border:1px solid #8142ae; border-radius:3px; font:inherit; cursor:pointer; text-decoration:none !important; }
-.monke-button:hover { background:#6a20a0; }
-.monke-button.secondary { background:#292929; border-color:#4a4a4a; }
-.monke-empty { padding:24px 12px; text-align:center; color:#a8a8a8; background:#181818; border:1px dashed #4a4a4a; border-radius:4px; }
-.monke-detail { padding:12px; margin-top:12px; background:#181818; border:1px solid #4a4a4a; border-radius:4px; }
-.monke-detail img { display:block; max-width:100%; max-height:360px; object-fit:contain; margin:10px auto; }
-.monke-detail[hidden] { display:none; }
-@media (max-width:550px) { .monke-toolbar select { flex:1 1 100%; } }
-
 </style>
 </head>
 <body>
@@ -527,37 +520,6 @@ hr { height: 1px; color: #4a4a4a; background-color: #4a4a4a; border: 0; margin: 
           Photopea is made by <a href="https://www.photopea.com" target="_blank">Ivan Kutskir</a>. This is just an embed — all editing happens in your browser, no data leaves your device.
         </p>
       </div>
-
-      <div id="section-monkemaps" class="page-section">
-        <h1 id="monkeMapsHeading">Monke Maps</h1>
-        <div id="siteSub">Gorilla Tag custom maps · SkyeHub</div>
-        <hr style="border-top:2px dashed #4a4a4a;background:none;color:#4a4a4a;">
-        <div class="monke-hub">
-          <p>Archived maps</p>
-          <div class="monke-toolbar">
-            <input type="search" id="monke-search" placeholder="Search maps or creators..." aria-label="Search maps or creators">
-            <select id="monke-sort" aria-label="Sort maps">
-              <option value="popular">Most popular</option>
-              <option value="newest">Newest first</option>
-              <option value="name">Name A–Z</option>
-            </select>
-          </div>
-          <div id="monke-summary" class="monke-summary">Loading maps...</div>
-          <div id="monke-map-grid" class="monke-grid"></div>
-          <div id="monke-empty" class="monke-empty" hidden>
-            <h3 id="monke-empty-title">The map catalogue is ready!</h3>
-            <p id="monke-empty-text">No maps have been added yet. Connect a map catalogue or add verified map entries to get started.</p>
-          </div>
-          <div id="monke-detail" class="monke-detail" hidden>
-            <h2 id="monke-detail-name">Map details</h2>
-            <img id="monke-detail-image" alt="Map preview" hidden>
-            <p id="monke-detail-creator" class="monke-meta"></p>
-            <p id="monke-detail-downloads" class="monke-meta"></p>
-            <a id="monke-detail-download" class="monke-button" hidden>Download map</a>
-            <button class="monke-button secondary" type="button" onclick="closeMonkeDetails()">Close details</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -576,7 +538,7 @@ hr { height: 1px; color: #4a4a4a; background-color: #4a4a4a; border: 0; margin: 
           <li><a href="#" onclick="showSection('passwordgen')">Password Generator</a></li>
           <li><a href="#" onclick="showSection('colortext')">Discord Color Text</a></li>
           <li><a href="#" onclick="showSection('photopea')">Photopea</a></li>
-          <li><a href="#" onclick="showSection('monkemaps'); return false;">Monke Maps</a></li>
+          <li><a href="maps.html">Monke Maps</a></li>
         </ul>
       </div>
     </div>
@@ -602,6 +564,10 @@ hr { height: 1px; color: #4a4a4a; background-color: #4a4a4a; border: 0; margin: 
   </div>
   
   <div class="visualClear"></div>
+
+  <div id="discord-widget-wrap">
+    <iframe src="https://discord.com/widget?id=1484332975247331468&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+  </div>
 
   <div id="wiki-player">
     <div id="wiki-player-header">
@@ -653,6 +619,8 @@ hr { height: 1px; color: #4a4a4a; background-color: #4a4a4a; border: 0; margin: 
 function showSection(name) {
   document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
   document.getElementById('section-' + name).classList.add('active');
+
+  // Lazy-load Photopea iframe only when the section is first opened
   if (name === 'photopea') {
     const iframe = document.getElementById('photopea-iframe');
     if (!iframe.dataset.loaded) {
@@ -1116,266 +1084,6 @@ async function fallbackToIpLocation() {
 }
 
 initWeatherAlerts();
-
-
-const MONKE_MAPS = [
-  {
-    "name": "Minecraft-New World",
-    "creator": "ToastySkater",
-    "downloads": 141627,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/MinecraftNewWorld.png",
-    "downloadUrl": "https://www.mediafire.com/file/z6qhbpsi1bu28vc/Minecraft-New_World.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Bikini Bottom - SpongeBob",
-    "creator": "Erik151515",
-    "downloads": 75418,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/BikiniBottom.png",
-    "downloadUrl": "https://www.mediafire.com/file/4qbsmnb448skju0/Erik151515_Bikini_Bottom_-_SpongeBob.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "ISS",
-    "creator": "Bobbie",
-    "downloads": 51585,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/ISS.png",
-    "downloadUrl": "https://www.mediafire.com/file/nh09o759n903i2p/ISS.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "New York City",
-    "creator": "Bobbie",
-    "downloads": 51314,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/NYC.png",
-    "downloadUrl": "https://www.mediafire.com/file/txiopeby9pv2gcv/New_York_City.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Super Mario 64 Minecraft",
-    "creator": "Pangwen",
-    "downloads": 46358,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/SM64.png",
-    "downloadUrl": "https://www.mediafire.com/file/d9dadewwugoc4lo/Pangwen_Super_Mario_64_Minecraft.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Whomp's Fortress",
-    "creator": "RedBrumbler",
-    "downloads": 36223,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Whomp%27s%20Fortress.png",
-    "downloadUrl": "https://www.mediafire.com/file/u0n751iql5pertf/Whomp%2527s_Fortress.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Rainbow Road (MK64)",
-    "creator": "Toastyyy",
-    "downloads": 34421,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/RainbowRoad.png",
-    "downloadUrl": "https://www.mediafire.com/file/oi9kv4gbqukmcwq/Toastyyy_Rainbow_Road_%2528MK64%2529.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Cool Cool Mountain SM64DS",
-    "creator": "RedBrumbler",
-    "downloads": 29526,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Cool%20Cool%20Mountains.png",
-    "downloadUrl": "https://www.mediafire.com/file/zpokxmnhs3bcv0r/RedBrumbler_Cool_Cool_Mountain_SM64DS.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Volcano",
-    "creator": "Bobbie",
-    "downloads": 23510,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Volcano.png",
-    "downloadUrl": "https://www.mediafire.com/file/x6nlxbthl3xhjup/Volcano.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "gkz_beginnerblock",
-    "creator": "Bobbie",
-    "downloads": 22703,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/BeginnerBlock.png",
-    "downloadUrl": "https://www.mediafire.com/file/mavv73ncxnrw8lb/gkz_beginnerblock.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Sword Fights on The Heights",
-    "creator": "kpmaxo",
-    "downloads": 19352,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/SFOTH.png",
-    "downloadUrl": "https://www.mediafire.com/file/7mgsn8xxpa8y7hs/kpmaxo_Sword_Fights_on_The_Heights.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Museam",
-    "creator": "Graic",
-    "downloads": 18404,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Museam.png",
-    "downloadUrl": "https://www.mediafire.com/file/j0kyadwyepqoyn9/Museum.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "3DS - Kokiri Forest",
-    "creator": "SpenceOtron",
-    "downloads": 17880,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Kokiri.png",
-    "downloadUrl": "https://www.mediafire.com/file/30fu72lzsbrt03o/SpenceOtron_3DS_-_Kokiri_Forest.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "BrickBattle",
-    "creator": "ErrorTv",
-    "downloads": 17604,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/BrickBattle.png",
-    "downloadUrl": "https://www.mediafire.com/file/zb2d3yq5sggvvdc/Realistic_Noob_BrickBattle.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Lost Woods",
-    "creator": "brekfestborritoe",
-    "downloads": 16996,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/LostWoods.png",
-    "downloadUrl": "https://www.mediafire.com/file/swzk7loy01d5gs9/Lost_Woods.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "gt_deadforest",
-    "creator": "brekfestborritoe",
-    "downloads": 16916,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/deadforest.png",
-    "downloadUrl": "https://www.mediafire.com/file/qt5wjfur98zek6a/Dead_Forest.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "MonkeTemplMap_V1.0",
-    "creator": "nachoengine",
-    "downloads": 16448,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/MonkeTemplMap.png",
-    "downloadUrl": "https://www.mediafire.com/file/p0dadiku7czzeyi/NachoEngine_MonkeTemplMap_V1.0.gtmap/file",
-    "description": ""
-  }
-];
-
-function monkeSafeUrl(value) {
-  try {
-    const url = new URL(value, window.location.href);
-    return (url.protocol === 'https:' || url.protocol === 'http:') ? url.href : '';
-  } catch (_) { return ''; }
-}
-
-function monkeText(tag, className, value) {
-  const el = document.createElement(tag);
-  if (className) el.className = className;
-  el.textContent = value == null ? '' : String(value);
-  return el;
-}
-
-function renderMonkeMaps() {
-  const grid = document.getElementById('monke-map-grid');
-  const empty = document.getElementById('monke-empty');
-  const summary = document.getElementById('monke-summary');
-  if (!grid || !empty || !summary) return;
-
-  const search = (document.getElementById('monke-search')?.value || '').trim().toLowerCase();
-  const sort = document.getElementById('monke-sort')?.value || 'popular';
-  const filtered = MONKE_MAPS.filter(map =>
-    [map.name, map.creator, map.description].join(' ').toLowerCase().includes(search)
-  );
-
-  filtered.sort((a, b) => {
-    if (sort === 'newest') return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0);
-    if (sort === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
-    return (Number(b.downloads) || 0) - (Number(a.downloads) || 0);
-  });
-
-  summary.textContent = `${filtered.length} map${filtered.length === 1 ? '' : 's'} found`;
-  grid.replaceChildren();
-  empty.hidden = filtered.length !== 0;
-  if (!filtered.length) {
-    document.getElementById('monke-empty-title').textContent = MONKE_MAPS.length ? 'No maps found' : 'The map catalogue is ready!';
-    document.getElementById('monke-empty-text').textContent = MONKE_MAPS.length
-      ? 'Try a different search term.'
-      : 'No maps match that search. Try another map name or creator.';
-    return;
-  }
-
-  for (const map of filtered) {
-    const card = document.createElement('article');
-    card.className = 'monke-card';
-    const imageUrl = monkeSafeUrl(map.image);
-    if (imageUrl) {
-      const image = document.createElement('img');
-      image.src = imageUrl;
-      image.alt = `${map.name || 'Map'} preview`;
-      image.loading = 'lazy';
-      card.appendChild(image);
-    } else {
-      const placeholder = document.createElement('div');
-      placeholder.setAttribute('aria-hidden', 'true');
-      placeholder.style.aspectRatio = '16 / 9';
-      placeholder.style.background = '#252525';
-      card.appendChild(placeholder);
-    }
-
-    const content = document.createElement('div');
-    content.className = 'monke-card-content';
-    content.appendChild(monkeText('h3', '', map.name || 'Untitled map'));
-    content.appendChild(monkeText('div', 'monke-meta', `By ${map.creator || 'Unknown creator'}`));
-    content.appendChild(monkeText('div', 'monke-meta', `${Number(map.downloads) || 0} downloads`));
-
-    const detailsButton = monkeText('button', 'monke-button secondary', 'View details');
-    detailsButton.type = 'button';
-    detailsButton.addEventListener('click', () => showMonkeDetails(map));
-    content.appendChild(detailsButton);
-
-    const downloadUrl = monkeSafeUrl(map.downloadUrl);
-    if (downloadUrl) {
-      const downloadButton = monkeText('a', 'monke-button', 'Download');
-      downloadButton.href = downloadUrl;
-      downloadButton.target = '_blank';
-      downloadButton.rel = 'noopener noreferrer';
-      content.appendChild(downloadButton);
-    }
-    card.appendChild(content);
-    grid.appendChild(card);
-  }
-}
-
-function showMonkeDetails(map) {
-  const detail = document.getElementById('monke-detail');
-  const image = document.getElementById('monke-detail-image');
-  const download = document.getElementById('monke-detail-download');
-  document.getElementById('monke-detail-name').textContent = map.name || 'Untitled map';
-  document.getElementById('monke-detail-creator').textContent = `Creator: ${map.creator || 'Unknown'}`;
-  document.getElementById('monke-detail-downloads').textContent = `${Number(map.downloads) || 0} downloads`;
-
-  const previewUrl = monkeSafeUrl(map.image);
-  image.hidden = !previewUrl;
-  if (previewUrl) image.src = previewUrl;
-  else image.removeAttribute('src');
-
-  const downloadUrl = monkeSafeUrl(map.downloadUrl);
-  download.hidden = !downloadUrl;
-  if (downloadUrl) {
-    download.href = downloadUrl;
-    download.target = '_blank';
-    download.rel = 'noopener noreferrer';
-  } else download.removeAttribute('href');
-
-  detail.hidden = false;
-  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function closeMonkeDetails() {
-  const detail = document.getElementById('monke-detail');
-  if (detail) detail.hidden = true;
-}
-
-document.getElementById('monke-search')?.addEventListener('input', renderMonkeMaps);
-document.getElementById('monke-sort')?.addEventListener('change', renderMonkeMaps);
-renderMonkeMaps();
-
 </script>
 
 <script>
