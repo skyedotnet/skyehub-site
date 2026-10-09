@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,324 +7,624 @@
 <meta name="theme-color" content="#6a20a0">
 <meta name="description" content="Browse and download Gorilla Tag custom maps from SkyeHub.">
 <title>SkyeHub — Monke Maps</title>
+
 <style>
 :root { color-scheme: dark; }
 * { box-sizing: border-box; }
+
 body {
-  margin: 0; background: #181818; color: #e8e8e8;
+  margin: 0;
+  background: #181818;
   background-image: linear-gradient(#181818, #131313);
+  color: #e8e8e8;
   font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
 }
+
 a { color: #8dc2ef; text-decoration: none; }
 a:hover { text-decoration: underline; }
-.wrap { max-width: 1180px; margin: 0 auto; padding: 26px 18px 50px; }
-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-bottom:1px solid #4a4a4a; padding-bottom:16px; }
-.brand { color:#e8e8e8; font-size:22px; font-weight:700; }
-nav { display:flex; flex-wrap:wrap; gap:14px; }
-h1 { font-size:clamp(28px,5vw,40px); font-weight:500; margin:22px 0 3px; }
-.subtitle { color:#a8a8a8; margin:0 0 18px; }
-hr { border:0; border-top:2px dashed #4a4a4a; margin:18px 0; }
-.monke-hub { margin-top:1em; }
-.monke-toolbar { display:flex; flex-wrap:wrap; gap:8px; margin:1em 0; }
-.monke-toolbar input,.monke-toolbar select { min-width:0; padding:10px; color:#e8e8e8; background:#181818; border:1px solid #4a4a4a; border-radius:4px; font:inherit; }
-.monke-toolbar input { flex:1 1 220px; }
-.monke-toolbar select { flex:0 1 180px; }
-.monke-summary { color:#a8a8a8; font-size:13px; margin:.8em 0; }
-.monke-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); gap:12px; margin-top:1em; }
-.monke-card { min-width:0; overflow:hidden; background:#1f1f1f; border:1px solid #3a3a3a; border-radius:5px; }
-.monke-card img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#252525; border-bottom:1px solid #3a3a3a; }
-.monke-card-content { padding:12px; }
-.monke-card h3 { margin:0 0 6px; overflow-wrap:anywhere; color:#e8e8e8; font-size:16px; }
-.monke-meta { color:#a8a8a8; font-size:13px; overflow-wrap:anywhere; }
-.monke-button { display:inline-block; padding:7px 11px; margin:7px 5px 0 0; color:#fff !important; background:#512078; border:1px solid #8142ae; border-radius:4px; font:inherit; cursor:pointer; text-decoration:none !important; }
-.monke-button:hover { background:#6a20a0; }
-.monke-button.secondary { background:#292929; border-color:#4a4a4a; }
-.monke-empty { padding:24px 12px; text-align:center; color:#a8a8a8; background:#181818; border:1px dashed #4a4a4a; border-radius:4px; }
-.monke-detail { padding:14px; margin-top:14px; background:#1f1f1f; border:1px solid #4a4a4a; border-radius:4px; }
-.monke-detail img { display:block; max-width:100%; max-height:360px; object-fit:contain; margin:10px auto; }
-.monke-detail[hidden] { display:none; }
-footer { color:#a8a8a8; text-align:center; font-size:13px; border-top:1px solid #4a4a4a; margin-top:30px; padding-top:14px; }
-@media (max-width:550px) { .monke-toolbar select { flex:1 1 100%; } }
+
+button, input, select { font: inherit; }
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 26px 18px 50px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid #4a4a4a;
+  padding-bottom: 16px;
+}
+
+.brand {
+  color: #e8e8e8;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+nav { display: flex; flex-wrap: wrap; gap: 14px; }
+
+h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 500;
+  margin: 22px 0 3px;
+}
+
+.subtitle { color: #a8a8a8; margin: 0 0 18px; }
+
+hr {
+  border: 0;
+  border-top: 2px dashed #4a4a4a;
+  margin: 18px 0;
+}
+
+.monke-hub { margin-top: 1em; }
+
+.monke-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1em 0;
+}
+
+.monke-toolbar input,
+.monke-toolbar select {
+  min-width: 0;
+  padding: 10px;
+  color: #e8e8e8;
+  background: #181818;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+}
+
+.monke-toolbar input { flex: 1 1 220px; }
+.monke-toolbar select { flex: 0 1 180px; }
+
+.monke-summary {
+  color: #a8a8a8;
+  font-size: 13px;
+  margin: .8em 0;
+}
+
+.monke-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  margin-top: 1em;
+}
+
+.monke-card {
+  min-width: 0;
+  overflow: hidden;
+  background: #1f1f1f;
+  border: 1px solid #3a3a3a;
+  border-radius: 5px;
+}
+
+.monke-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #252525;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.monke-card-content { padding: 12px; }
+
+.monke-card h3 {
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+  color: #e8e8e8;
+  font-size: 16px;
+}
+
+.monke-meta {
+  color: #a8a8a8;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.monke-button {
+  display: inline-block;
+  padding: 7px 11px;
+  margin: 7px 5px 0 0;
+  color: #fff !important;
+  background: #512078;
+  border: 1px solid #8142ae;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.monke-button:hover { background: #6a20a0; }
+
+.monke-button.secondary {
+  background: #292929;
+  border-color: #4a4a4a;
+}
+
+.monke-button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+.monke-empty {
+  padding: 24px 12px;
+  text-align: center;
+  color: #a8a8a8;
+  background: #181818;
+  border: 1px dashed #4a4a4a;
+  border-radius: 4px;
+}
+
+.monke-detail {
+  padding: 14px;
+  margin-top: 14px;
+  background: #1f1f1f;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+}
+
+.monke-detail img {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  margin: 10px auto;
+}
+
+.monke-detail[hidden] { display: none; }
+
+.monke-status {
+  color: #c9a5e8;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+footer {
+  color: #a8a8a8;
+  text-align: center;
+  font-size: 13px;
+  border-top: 1px solid #4a4a4a;
+  margin-top: 30px;
+  padding-top: 14px;
+}
+
+@media (max-width: 550px) {
+  .monke-toolbar select { flex: 1 1 100%; }
+}
 </style>
 </head>
+
 <body>
 <main class="wrap">
-  <header><a class="brand" href="index.html">SkyeHub :3</a><nav><a href="index.html">Home</a><a href="maps.html" aria-current="page">Monke Maps</a><a href="https://discord.gg/pFwB4thuD8" target="_blank" rel="noopener noreferrer">Discord</a></nav></header>
+  <header>
+    <a class="brand" href="index.html">SkyeHub :3</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="maps.html" aria-current="page">Monke Maps</a>
+      <a href="https://discord.gg/pFwB4thuD8" target="_blank" rel="noopener noreferrer">Discord</a>
+    </nav>
+  </header>
+
   <h1>Monke Maps</h1>
   <p class="subtitle">Gorilla Tag custom maps · SkyeHub</p>
   <hr>
+
   <section class="monke-hub" aria-label="Monke Maps catalogue">
-    <p>Browse the map catalogue. Search by map name or creator, sort the results, or open a map's MediaFire page.</p>
+    <p>Browse the map catalogue. Search by map name or creator, sort the results, and download maps directly from SkyeHub.</p>
+
     <div class="monke-toolbar">
-      <input type="search" id="monke-search" placeholder="Search maps or creators..." aria-label="Search maps or creators">
-      <select id="monke-sort" aria-label="Sort maps"><option value="popular">Most popular</option><option value="newest">Newest first</option><option value="name">Name A–Z</option></select>
+      <input
+        type="search"
+        id="monke-search"
+        placeholder="Search maps or creators..."
+        aria-label="Search maps or creators"
+      >
+
+      <select id="monke-sort" aria-label="Sort maps">
+        <option value="popular">Most popular</option>
+        <option value="newest">Newest first</option>
+        <option value="name">Name A–Z</option>
+      </select>
     </div>
-    <div id="monke-summary" class="monke-summary">Loading maps...</div>
+
+    <div id="monke-summary" class="monke-summary" role="status" aria-live="polite">
+      Loading maps...
+    </div>
+
     <div id="monke-map-grid" class="monke-grid"></div>
-    <div id="monke-empty" class="monke-empty" hidden><h3 id="monke-empty-title">No maps found</h3><p id="monke-empty-text">Try a different search term.</p></div>
-    <div id="monke-detail" class="monke-detail" hidden><h2 id="monke-detail-name">Map details</h2><img id="monke-detail-image" alt="Map preview" hidden><p id="monke-detail-creator" class="monke-meta"></p><p id="monke-detail-downloads" class="monke-meta"></p><a id="monke-detail-download" class="monke-button" hidden>Open download page</a><button class="monke-button secondary" type="button" onclick="closeMonkeDetails()">Close details</button></div>
+
+    <div id="monke-empty" class="monke-empty" hidden>
+      <h3 id="monke-empty-title">No maps found</h3>
+      <p id="monke-empty-text">Try a different search term.</p>
+      <button id="monke-retry" class="monke-button secondary" type="button" hidden>
+        Try again
+      </button>
+    </div>
+
+    <div id="monke-detail" class="monke-detail" hidden>
+      <h2 id="monke-detail-name">Map details</h2>
+      <img id="monke-detail-image" alt="Map preview" hidden>
+      <p id="monke-detail-creator" class="monke-meta"></p>
+      <p id="monke-detail-downloads" class="monke-meta"></p>
+      <p id="monke-detail-description"></p>
+      <p id="monke-detail-status" class="monke-status" role="status"></p>
+      <button id="monke-detail-download" class="monke-button" type="button">
+        Download map
+      </button>
+      <button id="monke-detail-close" class="monke-button secondary" type="button">
+        Close details
+      </button>
+    </div>
   </section>
-  <footer>SkyeHub · <a href="index.html">Return to the main page</a></footer>
+
+  <footer>
+    SkyeHub · <a href="index.html">Return to the main page</a>
+  </footer>
 </main>
+
 <script>
-const MONKE_MAPS = [
-  {
-    "name": "Minecraft-New World",
-    "creator": "ToastySkater",
-    "downloads": 141627,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/MinecraftNewWorld.png",
-    "downloadUrl": "https://www.mediafire.com/file/z6qhbpsi1bu28vc/Minecraft-New_World.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Bikini Bottom - SpongeBob",
-    "creator": "Erik151515",
-    "downloads": 75418,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/BikiniBottom.png",
-    "downloadUrl": "https://www.mediafire.com/file/4qbsmnb448skju0/Erik151515_Bikini_Bottom_-_SpongeBob.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "ISS",
-    "creator": "Bobbie",
-    "downloads": 51585,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/ISS.png",
-    "downloadUrl": "https://www.mediafire.com/file/nh09o759n903i2p/ISS.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "New York City",
-    "creator": "Bobbie",
-    "downloads": 51314,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/NYC.png",
-    "downloadUrl": "https://www.mediafire.com/file/txiopeby9pv2gcv/New_York_City.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Super Mario 64 Minecraft",
-    "creator": "Pangwen",
-    "downloads": 46358,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/SM64.png",
-    "downloadUrl": "https://www.mediafire.com/file/d9dadewwugoc4lo/Pangwen_Super_Mario_64_Minecraft.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Whomp's Fortress",
-    "creator": "RedBrumbler",
-    "downloads": 36223,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Whomp%27s%20Fortress.png",
-    "downloadUrl": "https://www.mediafire.com/file/u0n751iql5pertf/Whomp%2527s_Fortress.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Rainbow Road (MK64)",
-    "creator": "Toastyyy",
-    "downloads": 34421,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/RainbowRoad.png",
-    "downloadUrl": "https://www.mediafire.com/file/oi9kv4gbqukmcwq/Toastyyy_Rainbow_Road_%2528MK64%2529.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Cool Cool Mountain SM64DS",
-    "creator": "RedBrumbler",
-    "downloads": 29526,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Cool%20Cool%20Mountains.png",
-    "downloadUrl": "https://www.mediafire.com/file/zpokxmnhs3bcv0r/RedBrumbler_Cool_Cool_Mountain_SM64DS.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Volcano",
-    "creator": "Bobbie",
-    "downloads": 23510,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Volcano.png",
-    "downloadUrl": "https://www.mediafire.com/file/x6nlxbthl3xhjup/Volcano.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "gkz_beginnerblock",
-    "creator": "Bobbie",
-    "downloads": 22703,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/BeginnerBlock.png",
-    "downloadUrl": "https://www.mediafire.com/file/mavv73ncxnrw8lb/gkz_beginnerblock.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Sword Fights on The Heights",
-    "creator": "kpmaxo",
-    "downloads": 19352,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/SFOTH.png",
-    "downloadUrl": "https://www.mediafire.com/file/7mgsn8xxpa8y7hs/kpmaxo_Sword_Fights_on_The_Heights.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Museam",
-    "creator": "Graic",
-    "downloads": 18404,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Museam.png",
-    "downloadUrl": "https://www.mediafire.com/file/j0kyadwyepqoyn9/Museum.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "3DS - Kokiri Forest",
-    "creator": "SpenceOtron",
-    "downloads": 17880,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/Kokiri.png",
-    "downloadUrl": "https://www.mediafire.com/file/30fu72lzsbrt03o/SpenceOtron_3DS_-_Kokiri_Forest.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "BrickBattle",
-    "creator": "ErrorTv",
-    "downloads": 17604,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/BrickBattle.png",
-    "downloadUrl": "https://www.mediafire.com/file/zb2d3yq5sggvvdc/Realistic_Noob_BrickBattle.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "Lost Woods",
-    "creator": "brekfestborritoe",
-    "downloads": 16996,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/LostWoods.png",
-    "downloadUrl": "https://www.mediafire.com/file/swzk7loy01d5gs9/Lost_Woods.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "gt_deadforest",
-    "creator": "brekfestborritoe",
-    "downloads": 16916,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/deadforest.png",
-    "downloadUrl": "https://www.mediafire.com/file/qt5wjfur98zek6a/Dead_Forest.gtmap/file",
-    "description": ""
-  },
-  {
-    "name": "MonkeTemplMap_V1.0",
-    "creator": "nachoengine",
-    "downloads": 16448,
-    "image": "https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/MonkeTemplMap.png",
-    "downloadUrl": "https://www.mediafire.com/file/p0dadiku7czzeyi/NachoEngine_MonkeTemplMap_V1.0.gtmap/file",
-    "description": ""
-  }
-];
+'use strict';
+
+/*
+ * SkyeHub Maps API
+ *
+ * GET  /api/maps
+ * GET  /api/maps/{id}/file
+ * POST /api/maps/downloaded/{id}
+ *
+ * The API must allow requests from your website's origin through CORS.
+ */
+const MONKE_API = 'https://skyehub-api.bbruhvr1009.workers.dev/api';
+
+const MONKE_PREVIEWS = {
+  'Minecraft-New World': 'MinecraftNewWorld.png',
+  'Minecraft New World': 'MinecraftNewWorld.png',
+  'Bikini Bottom - SpongeBob': 'BikiniBottom.png',
+  'ISS': 'ISS.png',
+  'New York City': 'NYC.png',
+  'Super Mario 64 Minecraft': 'SM64.png',
+  "Whomp's Fortress": "Whomp's Fortress.png",
+  'Rainbow Road (MK64)': 'RainbowRoad.png',
+  'Cool Cool Mountain SM64DS': 'Cool Cool Mountains.png',
+  'Volcano': 'Volcano.png',
+  'gkz_beginnerblock': 'BeginnerBlock.png',
+  'Sword Fights on The Heights': 'SFOTH.png',
+  '3DS - Kokiri Forest': 'Kokiri.png',
+  'BrickBattle': 'BrickBattle.png',
+  'Lost Woods': 'LostWoods.png',
+  'gt_deadforest': 'deadforest.png',
+  'Dead Forest': 'deadforest.png',
+  'MonkeTemplMap_V1.0': 'MonkeTemplMap.png'
+};
+
+let MONKE_MAPS = [];
+let MONKE_SELECTED_MAP = null;
+let MONKE_LOADING = false;
+
+const $ = id => document.getElementById(id);
 
 function monkeSafeUrl(value) {
+  if (!value || typeof value !== 'string') return '';
+
   try {
     const url = new URL(value, window.location.href);
-    return (url.protocol === 'https:' || url.protocol === 'http:') ? url.href : '';
-  } catch (_) { return ''; }
+    return url.protocol === 'https:' || url.protocol === 'http:'
+      ? url.href
+      : '';
+  } catch {
+    return '';
+  }
 }
 
 function monkeText(tag, className, value) {
-  const el = document.createElement(tag);
-  if (className) el.className = className;
-  el.textContent = value == null ? '' : String(value);
-  return el;
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  element.textContent = value == null ? '' : String(value);
+  return element;
+}
+
+function monkeFormatNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number.toLocaleString() : '0';
+}
+
+function monkePreviewFor(map) {
+  if (map.preview_url || map.image || map.previewUrl) {
+    return monkeSafeUrl(map.preview_url || map.image || map.previewUrl);
+  }
+
+  const name = String(map.name || '');
+  const filename = MONKE_PREVIEWS[name];
+
+  if (!filename) return '';
+
+  // Preview images are expected to live alongside maps.html.
+  return monkeSafeUrl(filename);
+}
+
+function monkeNormalizeMap(raw) {
+  const map = raw && typeof raw === 'object' ? raw : {};
+
+  const name = map.map_name || map.name || 'Untitled map';
+  const creator =
+    map.author_name ||
+    map.creator ||
+    map.author ||
+    'Unknown creator';
+
+  return {
+    id: map.id == null ? '' : String(map.id),
+    name: String(name),
+    creator: String(creator),
+    downloads: Number(map.download_count ?? map.downloads ?? 0) || 0,
+    description: String(map.description || ''),
+    date: map.created_at || map.updated_at || map.date || '',
+    fileSize: Number(map.file_size || 0),
+    image: monkePreviewFor({
+      ...map,
+      name,
+      preview_url: map.preview_url || map.previewUrl || map.image
+    })
+  };
+}
+
+async function monkeApiRequest(path, options = {}) {
+  const response = await fetch(`${MONKE_API}${path}`, {
+    ...options,
+    headers: {
+      Accept: 'application/json',
+      ...(options.headers || {})
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`API request failed (${response.status})`);
+  }
+
+  return response;
+}
+
+async function loadMonkeMaps() {
+  if (MONKE_LOADING) return;
+  MONKE_LOADING = true;
+
+  const summary = $('monke-summary');
+  const grid = $('monke-map-grid');
+  const empty = $('monke-empty');
+  const retry = $('monke-retry');
+
+  summary.textContent = 'Loading maps...';
+  grid.replaceChildren();
+  empty.hidden = true;
+  retry.hidden = true;
+
+  try {
+    const response = await monkeApiRequest('/maps');
+    const result = await response.json();
+
+    // Support the API's documented response shape and common alternatives.
+    const maps =
+      result?.Data?.Maps ??
+      result?.data?.maps ??
+      result?.data?.Maps ??
+      result?.maps ??
+      result?.Maps ??
+      (Array.isArray(result?.data) ? result.data : null);
+
+    if (result?.Success === false || result?.success === false) {
+      throw new Error(result?.Message || result?.message || 'The API returned an error.');
+    }
+
+    if (!Array.isArray(maps)) {
+      throw new Error('The API response did not contain a map list.');
+    }
+
+    MONKE_MAPS = maps.map(monkeNormalizeMap);
+    renderMonkeMaps();
+  } catch (error) {
+    console.error('Failed to load SkyeHub maps:', error);
+
+    summary.textContent = 'Unable to load the map catalogue.';
+    grid.replaceChildren();
+
+    $('monke-empty-title').textContent = 'Could not load maps';
+    $('monke-empty-text').textContent =
+      'The SkyeHub API could not be reached. Check your connection and try again. If this keeps happening, check the API CORS settings.';
+    empty.hidden = false;
+    retry.hidden = false;
+  } finally {
+    MONKE_LOADING = false;
+  }
 }
 
 function renderMonkeMaps() {
-  const grid = document.getElementById('monke-map-grid');
-  const empty = document.getElementById('monke-empty');
-  const summary = document.getElementById('monke-summary');
-  if (!grid || !empty || !summary) return;
+  const grid = $('monke-map-grid');
+  const empty = $('monke-empty');
+  const summary = $('monke-summary');
 
-  const search = (document.getElementById('monke-search')?.value || '').trim().toLowerCase();
-  const sort = document.getElementById('monke-sort')?.value || 'popular';
+  const search = ($('monke-search').value || '').trim().toLowerCase();
+  const sort = $('monke-sort').value || 'popular';
+
   const filtered = MONKE_MAPS.filter(map =>
-    [map.name, map.creator, map.description].join(' ').toLowerCase().includes(search)
+    [map.name, map.creator, map.description]
+      .join(' ')
+      .toLowerCase()
+      .includes(search)
   );
 
   filtered.sort((a, b) => {
-    if (sort === 'newest') return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0);
-    if (sort === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
-    return (Number(b.downloads) || 0) - (Number(a.downloads) || 0);
+    if (sort === 'newest') {
+      return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0);
+    }
+
+    if (sort === 'name') {
+      return a.name.localeCompare(b.name);
+    }
+
+    return b.downloads - a.downloads;
   });
 
-  summary.textContent = `${filtered.length} map${filtered.length === 1 ? '' : 's'} found`;
+  summary.textContent =
+    `${filtered.length} map${filtered.length === 1 ? '' : 's'} found`;
+
   grid.replaceChildren();
   empty.hidden = filtered.length !== 0;
+
   if (!filtered.length) {
-    document.getElementById('monke-empty-title').textContent = MONKE_MAPS.length ? 'No maps found' : 'The map catalogue is ready!';
-    document.getElementById('monke-empty-text').textContent = MONKE_MAPS.length
-      ? 'Try a different search term.'
-      : 'No maps match that search. Try another map name or creator.';
+    $('monke-empty-title').textContent =
+      MONKE_MAPS.length ? 'No maps found' : 'No maps available';
+    $('monke-empty-text').textContent =
+      MONKE_MAPS.length
+        ? 'Try a different search term.'
+        : 'There are currently no published maps in the catalogue.';
+    $('monke-retry').hidden = MONKE_MAPS.length > 0;
     return;
   }
+
+  $('monke-retry').hidden = true;
 
   for (const map of filtered) {
     const card = document.createElement('article');
     card.className = 'monke-card';
-    const imageUrl = monkeSafeUrl(map.image);
-    if (imageUrl) {
+
+    if (map.image) {
       const image = document.createElement('img');
-      image.src = imageUrl;
-      image.alt = `${map.name || 'Map'} preview`;
+      image.src = map.image;
+      image.alt = `${map.name} preview`;
       image.loading = 'lazy';
+      image.onerror = () => {
+        image.removeAttribute('src');
+        image.alt = 'Preview unavailable';
+        image.style.display = 'none';
+      };
       card.appendChild(image);
-    } else {
-      const placeholder = document.createElement('div');
-      placeholder.setAttribute('aria-hidden', 'true');
-      placeholder.style.aspectRatio = '16 / 9';
-      placeholder.style.background = '#252525';
-      card.appendChild(placeholder);
     }
 
     const content = document.createElement('div');
     content.className = 'monke-card-content';
-    content.appendChild(monkeText('h3', '', map.name || 'Untitled map'));
-    content.appendChild(monkeText('div', 'monke-meta', `By ${map.creator || 'Unknown creator'}`));
-    content.appendChild(monkeText('div', 'monke-meta', `${Number(map.downloads) || 0} downloads`));
+
+    content.appendChild(monkeText('h3', '', map.name));
+    content.appendChild(monkeText('div', 'monke-meta', `By ${map.creator}`));
+    content.appendChild(
+      monkeText('div', 'monke-meta', `${monkeFormatNumber(map.downloads)} downloads`)
+    );
 
     const detailsButton = monkeText('button', 'monke-button secondary', 'View details');
     detailsButton.type = 'button';
     detailsButton.addEventListener('click', () => showMonkeDetails(map));
     content.appendChild(detailsButton);
 
-    const downloadUrl = monkeSafeUrl(map.downloadUrl);
-    if (downloadUrl) {
-      const downloadButton = monkeText('a', 'monke-button', 'Download');
-      downloadButton.href = downloadUrl;
-      downloadButton.target = '_blank';
-      downloadButton.rel = 'noopener noreferrer';
-      content.appendChild(downloadButton);
-    }
+    const downloadButton = monkeText('button', 'monke-button', 'Download');
+    downloadButton.type = 'button';
+    downloadButton.addEventListener('click', () => downloadMonkeMap(map));
+    content.appendChild(downloadButton);
+
     card.appendChild(content);
     grid.appendChild(card);
   }
 }
 
 function showMonkeDetails(map) {
-  const detail = document.getElementById('monke-detail');
-  const image = document.getElementById('monke-detail-image');
-  const download = document.getElementById('monke-detail-download');
-  document.getElementById('monke-detail-name').textContent = map.name || 'Untitled map';
-  document.getElementById('monke-detail-creator').textContent = `Creator: ${map.creator || 'Unknown'}`;
-  document.getElementById('monke-detail-downloads').textContent = `${Number(map.downloads) || 0} downloads`;
+  MONKE_SELECTED_MAP = map;
 
-  const previewUrl = monkeSafeUrl(map.image);
-  image.hidden = !previewUrl;
-  if (previewUrl) image.src = previewUrl;
-  else image.removeAttribute('src');
+  const detail = $('monke-detail');
+  const image = $('monke-detail-image');
 
-  const downloadUrl = monkeSafeUrl(map.downloadUrl);
-  download.hidden = !downloadUrl;
-  if (downloadUrl) {
-    download.href = downloadUrl;
-    download.target = '_blank';
-    download.rel = 'noopener noreferrer';
-  } else download.removeAttribute('href');
+  $('monke-detail-name').textContent = map.name;
+  $('monke-detail-creator').textContent = `Creator: ${map.creator}`;
+  $('monke-detail-downloads').textContent =
+    `${monkeFormatNumber(map.downloads)} downloads`;
+  $('monke-detail-description').textContent =
+    map.description || 'No description provided.';
+
+  if (map.image) {
+    image.src = map.image;
+    image.hidden = false;
+    image.onerror = () => {
+      image.hidden = true;
+      image.removeAttribute('src');
+    };
+  } else {
+    image.hidden = true;
+    image.removeAttribute('src');
+  }
+
+  $('monke-detail-status').textContent = '';
+  $('monke-detail-download').disabled = false;
 
   detail.hidden = false;
   detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function closeMonkeDetails() {
-  const detail = document.getElementById('monke-detail');
-  if (detail) detail.hidden = true;
+  $('monke-detail').hidden = true;
+  MONKE_SELECTED_MAP = null;
 }
 
-document.getElementById('monke-search')?.addEventListener('input', renderMonkeMaps);
-document.getElementById('monke-sort')?.addEventListener('change', renderMonkeMaps);
-renderMonkeMaps();
+async function downloadMonkeMap(map) {
+  if (!map || !map.id) {
+    $('monke-detail-status').textContent =
+      'This map is missing its API ID, so it cannot be downloaded through SkyeHub.';
+    return;
+  }
 
+  const button = $('monke-detail-download');
+  const status = $('monke-detail-status');
+
+  button.disabled = true;
+  status.textContent = 'Preparing your download...';
+
+  try {
+    // Count the download when supported. A counter failure should not
+    // prevent an attempt to download the actual map file.
+    try {
+      await monkeApiRequest(
+        `/maps/downloaded/${encodeURIComponent(map.id)}`,
+        { method: 'POST' }
+      );
+    } catch (error) {
+      console.warn('Could not update download count:', error);
+    }
+
+    const fileUrl = monkeSafeUrl(
+      `${MONKE_API}/maps/${encodeURIComponent(map.id)}/file`
+    );
+
+    if (!fileUrl) {
+      throw new Error('The download URL is invalid.');
+    }
+
+    status.textContent = 'Opening your download...';
+
+    // Navigate to the API's file endpoint. The browser handles the file
+    // according to the response headers returned by the Worker.
+    window.location.assign(fileUrl);
+  } catch (error) {
+    console.error('Map download failed:', error);
+    status.textContent =
+      'Download failed. The map may be unavailable or the API may be having trouble.';
+    button.disabled = false;
+  }
+}
+
+$('monke-search').addEventListener('input', renderMonkeMaps);
+$('monke-sort').addEventListener('change', renderMonkeMaps);
+$('monke-retry').addEventListener('click', loadMonkeMaps);
+$('monke-detail-close').addEventListener('click', closeMonkeDetails);
+$('monke-detail-download').addEventListener('click', () => {
+  if (MONKE_SELECTED_MAP) downloadMonkeMap(MONKE_SELECTED_MAP);
+});
+
+loadMonkeMaps();
 </script>
 </body>
 </html>
+```
