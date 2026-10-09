@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,622 +8,1418 @@
 <title>SkyeHub — Monke Maps</title>
 
 <style>
-:root { color-scheme: dark; }
-* { box-sizing: border-box; }
+:root {
+    color-scheme: dark;
+    --bg: #09090d;
+    --panel: #111117;
+    --panel2: #17171f;
+    --border: #292432;
+    --purple: #8b35d1;
+    --purple-light: #b66cff;
+    --text: #f5f2fa;
+    --muted: #aaa2b5;
+    --danger: #ff6b79;
+    --success: #65e6a0;
+}
+
+* {
+    box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  background: #181818;
-  background-image: linear-gradient(#181818, #131313);
-  color: #e8e8e8;
-  font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at top, #251037 0%, transparent 48%),
+        var(--bg);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
 
-a { color: #8dc2ef; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-button, input, select { font: inherit; }
-
-.wrap {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 26px 18px 50px;
+button, input, select {
+    font: inherit;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  border-bottom: 1px solid #4a4a4a;
-  padding-bottom: 16px;
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgb(9 9 13 / 88%);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav {
+    width: min(1250px, calc(100% - 36px));
+    min-height: 72px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
 }
 
 .brand {
-  color: #e8e8e8;
-  font-size: 22px;
-  font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: -.6px;
 }
 
-nav { display: flex; flex-wrap: wrap; gap: 14px; }
+.brand-icon {
+    display: grid;
+    place-items: center;
+    width: 39px;
+    height: 39px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #a44bfa, #5b168e);
+    box-shadow: 0 0 24px #842bd540;
+}
+
+.brand span:last-child {
+    color: var(--purple-light);
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+main {
+    width: min(1250px, calc(100% - 36px));
+    margin: auto;
+}
+
+.hero {
+    padding: 65px 0 35px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 11px;
+    border: 1px solid #683a87;
+    border-radius: 999px;
+    background: #32184770;
+    color: #d8b2ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+}
 
 h1 {
-  font-size: clamp(28px, 5vw, 40px);
-  font-weight: 500;
-  margin: 22px 0 3px;
+    margin: 20px 0 12px;
+    font-size: clamp(38px, 6vw, 66px);
+    line-height: 1.04;
+    letter-spacing: -2.8px;
 }
 
-.subtitle { color: #a8a8a8; margin: 0 0 18px; }
-
-hr {
-  border: 0;
-  border-top: 2px dashed #4a4a4a;
-  margin: 18px 0;
+.gradient-text {
+    background: linear-gradient(90deg, #c38bff, #8e42d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-.monke-hub { margin-top: 1em; }
-
-.monke-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 1em 0;
+.hero p {
+    max-width: 650px;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 16px;
 }
 
-.monke-toolbar input,
-.monke-toolbar select {
-  min-width: 0;
-  padding: 10px;
-  color: #e8e8e8;
-  background: #181818;
-  border: 1px solid #4a4a4a;
-  border-radius: 4px;
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0;
 }
 
-.monke-toolbar input { flex: 1 1 220px; }
-.monke-toolbar select { flex: 0 1 180px; }
-
-.monke-summary {
-  color: #a8a8a8;
-  font-size: 13px;
-  margin: .8em 0;
+.search-wrap {
+    position: relative;
+    flex: 1;
 }
 
-.monke-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-  gap: 12px;
-  margin-top: 1em;
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
 }
 
-.monke-card {
-  min-width: 0;
-  overflow: hidden;
-  background: #1f1f1f;
-  border: 1px solid #3a3a3a;
-  border-radius: 5px;
+.search-input, .sort-select {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #111117;
+    color: var(--text);
+    outline: none;
 }
 
-.monke-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: #252525;
-  border-bottom: 1px solid #3a3a3a;
+.search-input {
+    padding: 0 15px 0 43px;
 }
 
-.monke-card-content { padding: 12px; }
-
-.monke-card h3 {
-  margin: 0 0 6px;
-  overflow-wrap: anywhere;
-  color: #e8e8e8;
-  font-size: 16px;
+.sort-select {
+    width: 190px;
+    padding: 0 12px;
 }
 
-.monke-meta {
-  color: #a8a8a8;
-  font-size: 13px;
-  overflow-wrap: anywhere;
+.search-input:focus, .sort-select:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px #8b35d125;
 }
 
-.monke-button {
-  display: inline-block;
-  padding: 7px 11px;
-  margin: 7px 5px 0 0;
-  color: #fff !important;
-  background: #512078;
-  border: 1px solid #8142ae;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none !important;
+.stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 25px 0 16px;
+    color: var(--muted);
+    font-size: 13px;
 }
 
-.monke-button:hover { background: #6a20a0; }
-
-.monke-button.secondary {
-  background: #292929;
-  border-color: #4a4a4a;
+.stats strong {
+    color: white;
 }
 
-.monke-button:disabled {
-  opacity: .55;
-  cursor: wait;
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 }
 
-.monke-empty {
-  padding: 24px 12px;
-  text-align: center;
-  color: #a8a8a8;
-  background: #181818;
-  border: 1px dashed #4a4a4a;
-  border-radius: 4px;
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--success);
+    border-radius: 50%;
 }
 
-.monke-detail {
-  padding: 14px;
-  margin-top: 14px;
-  background: #1f1f1f;
-  border: 1px solid #4a4a4a;
-  border-radius: 4px;
+.status-dot.loading {
+    background: #e8c56b;
 }
 
-.monke-detail img {
-  display: block;
-  max-width: 100%;
-  max-height: 360px;
-  object-fit: contain;
-  margin: 10px auto;
+.status-dot.error {
+    background: var(--danger);
 }
 
-.monke-detail[hidden] { display: none; }
-
-.monke-status {
-  color: #c9a5e8;
-  font-size: 13px;
-  margin-top: 8px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    padding-bottom: 65px;
 }
 
-footer {
-  color: #a8a8a8;
-  text-align: center;
-  font-size: 13px;
-  border-top: 1px solid #4a4a4a;
-  margin-top: 30px;
-  padding-top: 14px;
+.map-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: linear-gradient(155deg, #17151e, #0e0e13 80%);
+    transition: border-color .18s, transform .18s;
 }
 
-@media (max-width: 550px) {
-  .monke-toolbar select { flex: 1 1 100%; }
+.map-card:hover {
+    transform: translateY(-3px);
+    border-color: #7543a0;
+}
+
+.preview {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 80%, #5b277b50, transparent 65%),
+        #15121b;
+    border-bottom: 1px solid var(--border);
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-placeholder {
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #a34ce966);
+}
+
+.preview-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 9px;
+    border: 1px solid #ffffff25;
+    border-radius: 8px;
+    background: #09090dcc;
+    backdrop-filter: blur(8px);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.card-body {
+    padding: 17px;
+}
+
+.card-title {
+    overflow-wrap: anywhere;
+    margin: 0 0 7px;
+    font-size: 18px;
+    font-weight: 850;
+    line-height: 1.35;
+}
+
+.creator {
+    margin-bottom: 12px;
+    color: #bd8be8;
+    font-size: 12px;
+}
+
+.description {
+    display: -webkit-box;
+    min-height: 42px;
+    overflow: hidden;
+    margin: 0 0 15px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 5px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 40px;
+    padding: 0 13px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel2);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    transition: .15s;
+}
+
+.btn:hover {
+    border-color: #8150a6;
+}
+
+.btn-primary {
+    flex: 1;
+    border-color: transparent;
+    background: linear-gradient(100deg, #8534c4, #64209a);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(100deg, #9b43dc, #762bb1);
+}
+
+.btn:disabled {
+    cursor: wait;
+    opacity: .55;
+}
+
+.empty, .error-panel, .loading-panel {
+    grid-column: 1 / -1;
+    padding: 50px 20px;
+    border: 1px dashed #393043;
+    border-radius: 16px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.empty-icon {
+    margin-bottom: 10px;
+    font-size: 38px;
+}
+
+.error-panel {
+    border-color: #793b46;
+}
+
+.error-panel strong {
+    display: block;
+    margin-bottom: 9px;
+    color: #ff9ca6;
+}
+
+.footer {
+    padding: 25px 18px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #000b;
+    backdrop-filter: blur(9px);
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-panel {
+    width: min(620px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid #493458;
+    border-radius: 18px;
+    background: #111117;
+    box-shadow: 0 25px 100px #0009;
+}
+
+.modal-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    background: #191320;
+}
+
+.modal-content {
+    padding: 23px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.modal-header h2 {
+    margin: 0 0 9px;
+    overflow-wrap: anywhere;
+}
+
+.close-btn {
+    width: 35px;
+    height: 35px;
+    flex: 0 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #1a1720;
+    color: white;
+    font-size: 20px;
+}
+
+.modal-description {
+    margin: 17px 0;
+    color: var(--muted);
+    white-space: pre-wrap;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.modal-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 15px 0;
+}
+
+.pill {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    color: #d2c5de;
+    font-size: 12px;
+}
+
+.toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+    max-width: min(420px, calc(100% - 40px));
+    padding: 13px 16px;
+    border: 1px solid #593b70;
+    border-radius: 12px;
+    background: #17111e;
+    box-shadow: 0 12px 35px #0008;
+    color: white;
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: .2s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 580px) {
+    .nav {
+        min-height: 62px;
+    }
+
+    .nav-links {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .hero {
+        padding-top: 42px;
+    }
+
+    h1 {
+        letter-spacing: -1.7px;
+    }
+
+    .toolbar {
+        flex-direction: column;
+    }
+
+    .sort-select {
+        width: 100%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 </style>
 </head>
 
 <body>
-<main class="wrap">
-  <header>
-    <a class="brand" href="index.html">SkyeHub :3</a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="maps.html" aria-current="page">Monke Maps</a>
-      <a href="https://discord.gg/pFwB4thuD8" target="_blank" rel="noopener noreferrer">Discord</a>
+<header class="topbar">
+    <nav class="nav">
+        <a class="brand" href="/">
+            <span class="brand-icon">✦</span>
+            <span>Skye<span>Hub</span></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/maps.html">Monke Maps</a>
+        </div>
     </nav>
-  </header>
+</header>
 
-  <h1>Monke Maps</h1>
-  <p class="subtitle">Gorilla Tag custom maps · SkyeHub</p>
-  <hr>
+<main>
+    <section class="hero">
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Community-made maps
+        </div>
 
-  <section class="monke-hub" aria-label="Monke Maps catalogue">
-    <p>Browse the map catalogue. Search by map name or creator, sort the results, and download maps directly from SkyeHub.</p>
+        <h1>Explore the <span class="gradient-text">Monkeverse.</span></h1>
 
-    <div class="monke-toolbar">
-      <input
-        type="search"
-        id="monke-search"
-        placeholder="Search maps or creators..."
-        aria-label="Search maps or creators"
-      >
+        <p>
+            Discover custom Gorilla Tag maps made by the community.
+            Find your next adventure and download maps to play.
+        </p>
+    </section>
 
-      <select id="monke-sort" aria-label="Sort maps">
-        <option value="popular">Most popular</option>
-        <option value="newest">Newest first</option>
-        <option value="name">Name A–Z</option>
-      </select>
-    </div>
+    <section aria-label="Map search and filters">
+        <div class="toolbar">
+            <div class="search-wrap">
+                <span class="search-icon">⌕</span>
+                <input
+                    id="search"
+                    class="search-input"
+                    type="search"
+                    placeholder="Search maps, creators, descriptions..."
+                    autocomplete="off"
+                >
+            </div>
 
-    <div id="monke-summary" class="monke-summary" role="status" aria-live="polite">
-      Loading maps...
-    </div>
+            <select id="sort" class="sort-select" aria-label="Sort maps">
+                <option value="popular">Most downloaded</option>
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="az">Name: A–Z</option>
+                <option value="za">Name: Z–A</option>
+            </select>
+        </div>
 
-    <div id="monke-map-grid" class="monke-grid"></div>
+        <div class="stats">
+            <div>
+                <strong id="map-count">Loading maps...</strong>
+                <span id="count-detail"></span>
+            </div>
 
-    <div id="monke-empty" class="monke-empty" hidden>
-      <h3 id="monke-empty-title">No maps found</h3>
-      <p id="monke-empty-text">Try a different search term.</p>
-      <button id="monke-retry" class="monke-button secondary" type="button" hidden>
-        Try again
-      </button>
-    </div>
+            <div class="status">
+                <span id="status-dot" class="status-dot loading"></span>
+                <span id="status-text">Connecting to SkyeHub API...</span>
+            </div>
+        </div>
 
-    <div id="monke-detail" class="monke-detail" hidden>
-      <h2 id="monke-detail-name">Map details</h2>
-      <img id="monke-detail-image" alt="Map preview" hidden>
-      <p id="monke-detail-creator" class="monke-meta"></p>
-      <p id="monke-detail-downloads" class="monke-meta"></p>
-      <p id="monke-detail-description"></p>
-      <p id="monke-detail-status" class="monke-status" role="status"></p>
-      <button id="monke-detail-download" class="monke-button" type="button">
-        Download map
-      </button>
-      <button id="monke-detail-close" class="monke-button secondary" type="button">
-        Close details
-      </button>
-    </div>
-  </section>
-
-  <footer>
-    SkyeHub · <a href="index.html">Return to the main page</a>
-  </footer>
+        <div id="map-grid" class="grid">
+            <div class="loading-panel">Loading maps from SkyeHub...</div>
+        </div>
+    </section>
 </main>
 
+<footer class="footer">
+    SkyeHub © <span id="year"></span> · Made for the Monke community.
+</footer>
+
+<div id="map-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+        <img id="modal-image" class="modal-image" alt="" hidden>
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modal-title">Map details</h2>
+                    <div id="modal-creator" class="creator"></div>
+                </div>
+                <button id="modal-close" class="close-btn" aria-label="Close">×</button>
+            </div>
+
+            <div id="modal-stats" class="modal-stats"></div>
+            <p id="modal-description" class="modal-description"></p>
+
+            <div class="card-actions">
+                <button id="modal-download" class="btn btn-primary">↓ Download map</button>
+                <button id="modal-close-bottom" class="btn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast" role="status"></div>
+
 <script>
-'use strict';
+"use strict";
 
 /*
- * SkyeHub Maps API
- *
- * GET  /api/maps
- * GET  /api/maps/{id}/file
- * POST /api/maps/downloaded/{id}
- *
- * The API must allow requests from your website's origin through CORS.
+ * SkyeHub API configuration.
+ * Public map requests do not need your upload secret.
  */
-const MONKE_API = 'https://skyehub-api.bbruhvr1009.workers.dev/api';
+const API_BASE = "https://skyehub-api.bbruhvr1009.workers.dev/api";
 
-const MONKE_PREVIEWS = {
-  'Minecraft-New World': 'MinecraftNewWorld.png',
-  'Minecraft New World': 'MinecraftNewWorld.png',
-  'Bikini Bottom - SpongeBob': 'BikiniBottom.png',
-  'ISS': 'ISS.png',
-  'New York City': 'NYC.png',
-  'Super Mario 64 Minecraft': 'SM64.png',
-  "Whomp's Fortress": "Whomp's Fortress.png",
-  'Rainbow Road (MK64)': 'RainbowRoad.png',
-  'Cool Cool Mountain SM64DS': 'Cool Cool Mountains.png',
-  'Volcano': 'Volcano.png',
-  'gkz_beginnerblock': 'BeginnerBlock.png',
-  'Sword Fights on The Heights': 'SFOTH.png',
-  '3DS - Kokiri Forest': 'Kokiri.png',
-  'BrickBattle': 'BrickBattle.png',
-  'Lost Woods': 'LostWoods.png',
-  'gt_deadforest': 'deadforest.png',
-  'Dead Forest': 'deadforest.png',
-  'MonkeTemplMap_V1.0': 'MonkeTemplMap.png'
+/*
+ * Optional local preview images.
+ * Add entries here if you store custom thumbnails in /images/maps/.
+ */
+const LOCAL_PREVIEWS = {
+    "skyehub-map-001": "/images/maps/dead-forest.png",
+    "skyehub-Erik151515-Bikini-Bottom---SpongeBob": "/images/maps/bikini-bottom.png",
+    "skyehub-ISS": "/images/maps/iss.png",
+    "skyehub-Lost-Woods": "/images/maps/lost-woods.png",
+    "skyehub-Minecraft-New-World": "/images/maps/minecraft-new-world.png",
+    "skyehub-NachoEngine-MonkeTemplMap-V1-0": "/images/maps/monke-temple.png",
+    "skyehub-New-York-City": "/images/maps/new-york-city.png",
+    "skyehub-Pangwen-Super-Mario-64-Minecraft": "/images/maps/super-mario-64.png",
+    "skyehub-Realistic-Noob-BrickBattle": "/images/maps/brick-battle.png",
+    "skyehub-RedBrumbler-Cool-Cool-Mountain-SM64DS": "/images/maps/cool-cool-mountain.png",
+    "skyehub-SpenceOtron-3DS-Kokiri-Forest": "/images/maps/kokiri-forest.png",
+    "skyehub-Toastyyy-Rainbow-Road-MK64": "/images/maps/rainbow-road.png",
+    "skyehub-Volcano": "/images/maps/volcano.png",
+    "skyehub-Whomp-s-Fortress": "/images/maps/whomps-fortress.png",
+    "skyehub-gkz-beginnerblock": "/images/maps/beginner-block.png",
+    "skyehub-kpmaxo-Sword-Fights-on-The-Heights": "/images/maps/sword-fights.png"
 };
 
-let MONKE_MAPS = [];
-let MONKE_SELECTED_MAP = null;
-let MONKE_LOADING = false;
+const grid = document.getElementById("map-grid");
+const searchInput = document.getElementById("search");
+const sortSelect = document.getElementById("sort");
+const mapCount = document.getElementById("map-count");
+const countDetail = document.getElementById("count-detail");
+const statusDot = document.getElementById("status-dot");
+const statusText = document.getElementById("status-text");
+const modal = document.getElementById("map-modal");
+const toast = document.getElementById("toast");
 
-const $ = id => document.getElementById(id);
+let allMaps = [];
+let selectedMap = null;
+let toastTimeout = null;
 
-function monkeSafeUrl(value) {
-  if (!value || typeof value !== 'string') return '';
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  try {
-    const url = new URL(value, window.location.href);
-    return url.protocol === 'https:' || url.protocol === 'http:'
-      ? url.href
-      : '';
-  } catch {
-    return '';
-  }
-}
+/*
+ * Case-insensitive property reader.
+ * Supports both snake_case and PascalCase API responses.
+ */
+function getValue(object, keys) {
+    if (!object || typeof object !== "object") return undefined;
 
-function monkeText(tag, className, value) {
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  element.textContent = value == null ? '' : String(value);
-  return element;
-}
-
-function monkeFormatNumber(value) {
-  const number = Number(value);
-  return Number.isFinite(number) ? number.toLocaleString() : '0';
-}
-
-function monkePreviewFor(map) {
-  if (map.preview_url || map.image || map.previewUrl) {
-    return monkeSafeUrl(map.preview_url || map.image || map.previewUrl);
-  }
-
-  const name = String(map.name || '');
-  const filename = MONKE_PREVIEWS[name];
-
-  if (!filename) return '';
-
-  // Preview images are expected to live alongside maps.html.
-  return monkeSafeUrl(filename);
-}
-
-function monkeNormalizeMap(raw) {
-  const map = raw && typeof raw === 'object' ? raw : {};
-
-  const name = map.map_name || map.name || 'Untitled map';
-  const creator =
-    map.author_name ||
-    map.creator ||
-    map.author ||
-    'Unknown creator';
-
-  return {
-    id: map.id == null ? '' : String(map.id),
-    name: String(name),
-    creator: String(creator),
-    downloads: Number(map.download_count ?? map.downloads ?? 0) || 0,
-    description: String(map.description || ''),
-    date: map.created_at || map.updated_at || map.date || '',
-    fileSize: Number(map.file_size || 0),
-    image: monkePreviewFor({
-      ...map,
-      name,
-      preview_url: map.preview_url || map.previewUrl || map.image
-    })
-  };
-}
-
-async function monkeApiRequest(path, options = {}) {
-  const response = await fetch(`${MONKE_API}${path}`, {
-    ...options,
-    headers: {
-      Accept: 'application/json',
-      ...(options.headers || {})
-    }
-  });
-
-  if (!response.ok) {
-    throw new Error(`API request failed (${response.status})`);
-  }
-
-  return response;
-}
-
-async function loadMonkeMaps() {
-  if (MONKE_LOADING) return;
-  MONKE_LOADING = true;
-
-  const summary = $('monke-summary');
-  const grid = $('monke-map-grid');
-  const empty = $('monke-empty');
-  const retry = $('monke-retry');
-
-  summary.textContent = 'Loading maps...';
-  grid.replaceChildren();
-  empty.hidden = true;
-  retry.hidden = true;
-
-  try {
-    const response = await monkeApiRequest('/maps');
-    const result = await response.json();
-
-    // Support the API's documented response shape and common alternatives.
-    const maps =
-      result?.Data?.Maps ??
-      result?.data?.maps ??
-      result?.data?.Maps ??
-      result?.maps ??
-      result?.Maps ??
-      (Array.isArray(result?.data) ? result.data : null);
-
-    if (result?.Success === false || result?.success === false) {
-      throw new Error(result?.Message || result?.message || 'The API returned an error.');
+    for (const key of keys) {
+        if (object[key] !== undefined && object[key] !== null) {
+            return object[key];
+        }
     }
 
-    if (!Array.isArray(maps)) {
-      throw new Error('The API response did not contain a map list.');
+    const normalizedKeys = new Map(
+        Object.keys(object).map(key => [
+            key.toLowerCase().replace(/[^a-z0-9]/g, ""),
+            key
+        ])
+    );
+
+    for (const key of keys) {
+        const actualKey = normalizedKeys.get(
+            key.toLowerCase().replace(/[^a-z0-9]/g, "")
+        );
+
+        if (actualKey !== undefined &&
+            object[actualKey] !== undefined &&
+            object[actualKey] !== null) {
+            return object[actualKey];
+        }
     }
 
-    MONKE_MAPS = maps.map(monkeNormalizeMap);
-    renderMonkeMaps();
-  } catch (error) {
-    console.error('Failed to load SkyeHub maps:', error);
+    return undefined;
+}
 
-    summary.textContent = 'Unable to load the map catalogue.';
+function firstNonEmpty(...values) {
+    for (const value of values) {
+        if (value === undefined || value === null) continue;
+
+        if (typeof value === "string" && !value.trim()) continue;
+
+        return value;
+    }
+
+    return undefined;
+}
+
+function toNumber(value) {
+    if (typeof value === "number") {
+        return Number.isFinite(value) ? value : 0;
+    }
+
+    if (typeof value === "string") {
+        const parsed = Number(value.replace(/,/g, "").trim());
+        return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    return 0;
+}
+
+function toDate(value) {
+    if (value === undefined || value === null || value === "") {
+        return null;
+    }
+
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
+/*
+ * Unwraps API records that may be nested in objects like:
+ * { Map: {...} }, { Data: {...} }, or { map: {...} }.
+ */
+function unwrapMap(raw) {
+    let current = raw;
+
+    for (let i = 0; i < 4; i++) {
+        if (!current || typeof current !== "object" || Array.isArray(current)) {
+            break;
+        }
+
+        const looksLikeMap = getValue(current, [
+            "map_name", "mapName", "name", "Name",
+            "author_name", "authorName", "creator",
+            "file_url", "fileUrl", "download_url", "downloadUrl"
+        ]) !== undefined;
+
+        if (looksLikeMap) break;
+
+        const nested = getValue(current, [
+            "Map", "map", "MapData", "mapData",
+            "Data", "data", "Record", "record",
+            "Result", "result", "Item", "item"
+        ]);
+
+        if (!nested || typeof nested !== "object" || nested === current) {
+            break;
+        }
+
+        current = nested;
+    }
+
+    return current || raw;
+}
+
+function normalizeMap(raw, index) {
+    const map = unwrapMap(raw);
+
+    const id = firstNonEmpty(
+        getValue(map, [
+            "id", "map_id", "mapId", "MapId",
+            "uuid", "guid", "slug", "Slug"
+        ]),
+        getValue(raw, ["id", "map_id", "mapId", "uuid", "guid"]),
+        `unknown-${index}`
+    );
+
+    const name = firstNonEmpty(
+        getValue(map, [
+            "map_name", "mapName", "MapName",
+            "name", "Name", "title", "Title",
+            "display_name", "displayName"
+        ]),
+        getValue(raw, ["map_name", "mapName", "name", "title"]),
+        "Untitled map"
+    );
+
+    const author = firstNonEmpty(
+        getValue(map, [
+            "author_name", "authorName", "AuthorName",
+            "creator_name", "creatorName", "creatorName",
+            "creator", "Creator", "author", "Author",
+            "uploaded_by", "uploadedBy", "username", "user_name"
+        ]),
+        getValue(raw, [
+            "author_name", "authorName", "creator",
+            "author", "username", "uploaded_by"
+        ]),
+        "Unknown creator"
+    );
+
+    const discriminator = firstNonEmpty(
+        getValue(map, [
+            "author_discriminator", "authorDiscriminator",
+            "discriminator", "tag"
+        ]),
+        ""
+    );
+
+    const description = firstNonEmpty(
+        getValue(map, [
+            "description", "Description", "map_description",
+            "mapDescription", "details", "summary"
+        ]),
+        getValue(raw, ["description", "map_description"]),
+        "No description has been provided for this map."
+    );
+
+    const downloads = toNumber(firstNonEmpty(
+        getValue(map, [
+            "download_count", "downloadCount", "DownloadCount",
+            "downloads", "Downloads", "downloads_count",
+            "downloadsCount", "total_downloads", "totalDownloads",
+            "downloaded", "downloaded_count", "downloadedCount"
+        ]),
+        getValue(raw, ["download_count", "downloadCount", "downloads"]),
+        0
+    ));
+
+    const fileSize = firstNonEmpty(
+        getValue(map, [
+            "file_size", "fileSize", "FileSize",
+            "size", "Size", "file_size_bytes", "fileSizeBytes"
+        ]),
+        getValue(raw, ["file_size", "fileSize", "size"]),
+        0
+    );
+
+    const preview = firstNonEmpty(
+        getValue(map, [
+            "preview_url", "previewUrl", "PreviewUrl",
+            "thumbnail_url", "thumbnailUrl", "thumbnail",
+            "image_url", "imageUrl", "image", "cover_url", "coverUrl"
+        ]),
+        getValue(raw, [
+            "preview_url", "previewUrl", "thumbnail_url", "thumbnail"
+        ]),
+        LOCAL_PREVIEWS[String(id)],
+        ""
+    );
+
+    const fileUrl = firstNonEmpty(
+        getValue(map, [
+            "file_url", "fileUrl", "FileUrl",
+            "download_url", "downloadUrl", "download_link",
+            "downloadLink", "url", "Url"
+        ]),
+        getValue(raw, ["file_url", "fileUrl", "download_url"]),
+        ""
+    );
+
+    const createdAt = firstNonEmpty(
+        getValue(map, [
+            "created_at", "createdAt", "CreatedAt",
+            "upload_date", "uploadDate", "uploaded_at",
+            "uploadedAt", "date"
+        ]),
+        getValue(raw, ["created_at", "createdAt"]),
+        null
+    );
+
+    return {
+        id: String(id),
+        name: String(name),
+        author: String(author),
+        discriminator: String(discriminator),
+        description: String(description),
+        downloads,
+        fileSize,
+        preview: String(preview),
+        fileUrl: String(fileUrl),
+        createdAt,
+        createdDate: toDate(createdAt),
+        raw: map
+    };
+}
+
+/*
+ * Finds the maps array even if the API adds extra wrapper objects.
+ */
+function findMapsArray(payload) {
+    if (Array.isArray(payload)) return payload;
+
+    if (!payload || typeof payload !== "object") return null;
+
+    const directArray = getValue(payload, [
+        "Maps", "maps", "items", "Items", "results", "Results",
+        "records", "Records", "rows", "Rows"
+    ]);
+
+    if (Array.isArray(directArray)) return directArray;
+
+    const nested = getValue(payload, [
+        "Data", "data", "Result", "result",
+        "Response", "response", "Payload", "payload"
+    ]);
+
+    if (nested && nested !== payload) {
+        const found = findMapsArray(nested);
+        if (found) return found;
+    }
+
+    return null;
+}
+
+function setStatus(message, state = "ok") {
+    statusText.textContent = message;
+    statusDot.className = "status-dot";
+
+    if (state === "loading") {
+        statusDot.classList.add("loading");
+    } else if (state === "error") {
+        statusDot.classList.add("error");
+    }
+}
+
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3500);
+}
+
+function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+function formatDownloads(value) {
+    return new Intl.NumberFormat("en-US").format(toNumber(value));
+}
+
+function formatFileSize(value) {
+    if (typeof value === "string" && /[a-z]/i.test(value)) {
+        return value;
+    }
+
+    const bytes = toNumber(value);
+    if (bytes <= 0) return "Size unavailable";
+
+    const units = ["B", "KB", "MB", "GB", "TB"];
+    let size = bytes;
+    let unit = 0;
+
+    while (size >= 1024 && unit < units.length - 1) {
+        size /= 1024;
+        unit++;
+    }
+
+    return `${size.toFixed(unit >= 2 ? 2 : 1)} ${units[unit]}`;
+}
+
+function formatDate(date) {
+    if (!date) return "Date unavailable";
+
+    return date.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    });
+}
+
+function getCreatorText(map) {
+    if (map.discriminator) {
+        return `By ${map.author}#${map.discriminator}`;
+    }
+
+    return `By ${map.author}`;
+}
+
+function getSearchText(map) {
+    return [
+        map.name,
+        map.author,
+        map.discriminator,
+        map.description,
+        map.id
+    ].join(" ").toLowerCase();
+}
+
+function sortMaps(maps) {
+    const sorted = [...maps];
+
+    switch (sortSelect.value) {
+        case "newest":
+            sorted.sort((a, b) =>
+                (b.createdDate?.getTime() || 0) -
+                (a.createdDate?.getTime() || 0)
+            );
+            break;
+
+        case "oldest":
+            sorted.sort((a, b) =>
+                (a.createdDate?.getTime() || 0) -
+                (b.createdDate?.getTime() || 0)
+            );
+            break;
+
+        case "az":
+            sorted.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+
+        case "za":
+            sorted.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+
+        default:
+            sorted.sort((a, b) => b.downloads - a.downloads);
+            break;
+    }
+
+    return sorted;
+}
+
+function createMapCard(map) {
+    const card = document.createElement("article");
+    card.className = "map-card";
+
+    const preview = document.createElement("div");
+    preview.className = "preview";
+
+    const placeholder = document.createElement("div");
+    placeholder.className = "preview-placeholder";
+    placeholder.textContent = "✦";
+    preview.appendChild(placeholder);
+
+    if (map.preview) {
+        const image = document.createElement("img");
+        image.src = map.preview;
+        image.alt = `${map.name} preview`;
+        image.loading = "lazy";
+
+        image.addEventListener("load", () => {
+            placeholder.remove();
+        });
+
+        image.addEventListener("error", () => {
+            image.remove();
+        });
+
+        preview.appendChild(image);
+    }
+
+    const label = document.createElement("span");
+    label.className = "preview-label";
+    label.textContent = "Gorilla Tag Map";
+    preview.appendChild(label);
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const title = document.createElement("h2");
+    title.className = "card-title";
+    title.textContent = map.name;
+
+    const creator = document.createElement("div");
+    creator.className = "creator";
+    creator.textContent = getCreatorText(map);
+
+    const description = document.createElement("p");
+    description.className = "description";
+    description.textContent = map.description;
+
+    const meta = document.createElement("div");
+    meta.className = "card-meta";
+
+    const downloads = document.createElement("span");
+    downloads.textContent = `↓ ${formatDownloads(map.downloads)} downloads`;
+
+    const size = document.createElement("span");
+    size.textContent = formatFileSize(map.fileSize);
+
+    meta.append(downloads, size);
+
+    const actions = document.createElement("div");
+    actions.className = "card-actions";
+
+    const detailsButton = document.createElement("button");
+    detailsButton.className = "btn";
+    detailsButton.textContent = "Details";
+    detailsButton.addEventListener("click", () => openDetails(map));
+
+    const downloadButton = document.createElement("button");
+    downloadButton.className = "btn btn-primary";
+    downloadButton.textContent = "↓ Download";
+    downloadButton.addEventListener("click", () => downloadMap(map, downloadButton));
+
+    actions.append(detailsButton, downloadButton);
+    body.append(title, creator, description, meta, actions);
+    card.append(preview, body);
+
+    return card;
+}
+
+function renderMaps() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    const filtered = allMaps.filter(map =>
+        getSearchText(map).includes(query)
+    );
+
+    const sorted = sortMaps(filtered);
+
+    mapCount.textContent = `${sorted.length} ${sorted.length === 1 ? "map" : "maps"} found`;
+    countDetail.textContent = ` · ${allMaps.length} published total`;
+
     grid.replaceChildren();
 
-    $('monke-empty-title').textContent = 'Could not load maps';
-    $('monke-empty-text').textContent =
-      'The SkyeHub API could not be reached. Check your connection and try again. If this keeps happening, check the API CORS settings.';
-    empty.hidden = false;
-    retry.hidden = false;
-  } finally {
-    MONKE_LOADING = false;
-  }
-}
-
-function renderMonkeMaps() {
-  const grid = $('monke-map-grid');
-  const empty = $('monke-empty');
-  const summary = $('monke-summary');
-
-  const search = ($('monke-search').value || '').trim().toLowerCase();
-  const sort = $('monke-sort').value || 'popular';
-
-  const filtered = MONKE_MAPS.filter(map =>
-    [map.name, map.creator, map.description]
-      .join(' ')
-      .toLowerCase()
-      .includes(search)
-  );
-
-  filtered.sort((a, b) => {
-    if (sort === 'newest') {
-      return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0);
+    if (!sorted.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.innerHTML = `
+            <div class="empty-icon">⌕</div>
+            <strong>No maps found</strong>
+            <p>Try another search term.</p>
+        `;
+        grid.appendChild(empty);
+        return;
     }
 
-    if (sort === 'name') {
-      return a.name.localeCompare(b.name);
+    const fragment = document.createDocumentFragment();
+
+    for (const map of sorted) {
+        fragment.appendChild(createMapCard(map));
     }
 
-    return b.downloads - a.downloads;
-  });
+    grid.appendChild(fragment);
+}
 
-  summary.textContent =
-    `${filtered.length} map${filtered.length === 1 ? '' : 's'} found`;
+function openDetails(map) {
+    selectedMap = map;
 
-  grid.replaceChildren();
-  empty.hidden = filtered.length !== 0;
+    document.getElementById("modal-title").textContent = map.name;
+    document.getElementById("modal-creator").textContent = getCreatorText(map);
+    document.getElementById("modal-description").textContent = map.description;
 
-  if (!filtered.length) {
-    $('monke-empty-title').textContent =
-      MONKE_MAPS.length ? 'No maps found' : 'No maps available';
-    $('monke-empty-text').textContent =
-      MONKE_MAPS.length
-        ? 'Try a different search term.'
-        : 'There are currently no published maps in the catalogue.';
-    $('monke-retry').hidden = MONKE_MAPS.length > 0;
-    return;
-  }
+    const modalImage = document.getElementById("modal-image");
 
-  $('monke-retry').hidden = true;
+    if (map.preview) {
+        modalImage.src = map.preview;
+        modalImage.alt = `${map.name} preview`;
+        modalImage.hidden = false;
 
-  for (const map of filtered) {
-    const card = document.createElement('article');
-    card.className = 'monke-card';
-
-    if (map.image) {
-      const image = document.createElement('img');
-      image.src = map.image;
-      image.alt = `${map.name} preview`;
-      image.loading = 'lazy';
-      image.onerror = () => {
-        image.removeAttribute('src');
-        image.alt = 'Preview unavailable';
-        image.style.display = 'none';
-      };
-      card.appendChild(image);
+        modalImage.onerror = () => {
+            modalImage.hidden = true;
+        };
+    } else {
+        modalImage.hidden = true;
+        modalImage.removeAttribute("src");
     }
 
-    const content = document.createElement('div');
-    content.className = 'monke-card-content';
+    const stats = document.getElementById("modal-stats");
+    stats.replaceChildren();
 
-    content.appendChild(monkeText('h3', '', map.name));
-    content.appendChild(monkeText('div', 'monke-meta', `By ${map.creator}`));
-    content.appendChild(
-      monkeText('div', 'monke-meta', `${monkeFormatNumber(map.downloads)} downloads`)
-    );
+    const details = [
+        `↓ ${formatDownloads(map.downloads)} downloads`,
+        formatFileSize(map.fileSize),
+        `Uploaded ${formatDate(map.createdDate)}`
+    ];
 
-    const detailsButton = monkeText('button', 'monke-button secondary', 'View details');
-    detailsButton.type = 'button';
-    detailsButton.addEventListener('click', () => showMonkeDetails(map));
-    content.appendChild(detailsButton);
+    for (const detail of details) {
+        const pill = document.createElement("span");
+        pill.className = "pill";
+        pill.textContent = detail;
+        stats.appendChild(pill);
+    }
 
-    const downloadButton = monkeText('button', 'monke-button', 'Download');
-    downloadButton.type = 'button';
-    downloadButton.addEventListener('click', () => downloadMonkeMap(map));
-    content.appendChild(downloadButton);
-
-    card.appendChild(content);
-    grid.appendChild(card);
-  }
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
 }
 
-function showMonkeDetails(map) {
-  MONKE_SELECTED_MAP = map;
-
-  const detail = $('monke-detail');
-  const image = $('monke-detail-image');
-
-  $('monke-detail-name').textContent = map.name;
-  $('monke-detail-creator').textContent = `Creator: ${map.creator}`;
-  $('monke-detail-downloads').textContent =
-    `${monkeFormatNumber(map.downloads)} downloads`;
-  $('monke-detail-description').textContent =
-    map.description || 'No description provided.';
-
-  if (map.image) {
-    image.src = map.image;
-    image.hidden = false;
-    image.onerror = () => {
-      image.hidden = true;
-      image.removeAttribute('src');
-    };
-  } else {
-    image.hidden = true;
-    image.removeAttribute('src');
-  }
-
-  $('monke-detail-status').textContent = '';
-  $('monke-detail-download').disabled = false;
-
-  detail.hidden = false;
-  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function closeDetails() {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+    selectedMap = null;
 }
 
-function closeMonkeDetails() {
-  $('monke-detail').hidden = true;
-  MONKE_SELECTED_MAP = null;
-}
+async function downloadMap(map, button) {
+    if (!map.id || map.id.startsWith("unknown-")) {
+        showToast("This map is missing its ID. Please refresh the page.");
+        return;
+    }
 
-async function downloadMonkeMap(map) {
-  if (!map || !map.id) {
-    $('monke-detail-status').textContent =
-      'This map is missing its API ID, so it cannot be downloaded through SkyeHub.';
-    return;
-  }
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Preparing...";
 
-  const button = $('monke-detail-download');
-  const status = $('monke-detail-status');
-
-  button.disabled = true;
-  status.textContent = 'Preparing your download...';
-
-  try {
-    // Count the download when supported. A counter failure should not
-    // prevent an attempt to download the actual map file.
     try {
-      await monkeApiRequest(
-        `/maps/downloaded/${encodeURIComponent(map.id)}`,
-        { method: 'POST' }
-      );
+        /*
+         * Count the download. The file endpoint remains the source of the
+         * actual download; the API can enforce published-map access there.
+         */
+        try {
+            await fetch(
+                `${API_BASE}/maps/downloaded/${encodeURIComponent(map.id)}`,
+                {
+                    method: "POST",
+                    headers: { "Accept": "application/json" }
+                }
+            );
+        } catch (error) {
+            console.warn("Could not update download count:", error);
+        }
+
+        /*
+         * Use the API's file endpoint by default so private storage URLs
+         * are not exposed or guessed by the page.
+         */
+        const fileEndpoint =
+            `${API_BASE}/maps/${encodeURIComponent(map.id)}/file`;
+
+        window.location.assign(fileEndpoint);
+
+        /*
+         * Refresh the displayed download count after a short delay.
+         */
+        setTimeout(() => {
+            loadMaps({ quiet: true });
+        }, 1800);
+
     } catch (error) {
-      console.warn('Could not update download count:', error);
+        console.error("Download failed:", error);
+        showToast("Could not start the download. Please try again.");
+        button.disabled = false;
+        button.textContent = originalText;
     }
-
-    const fileUrl = monkeSafeUrl(
-      `${MONKE_API}/maps/${encodeURIComponent(map.id)}/file`
-    );
-
-    if (!fileUrl) {
-      throw new Error('The download URL is invalid.');
-    }
-
-    status.textContent = 'Opening your download...';
-
-    // Navigate to the API's file endpoint. The browser handles the file
-    // according to the response headers returned by the Worker.
-    window.location.assign(fileUrl);
-  } catch (error) {
-    console.error('Map download failed:', error);
-    status.textContent =
-      'Download failed. The map may be unavailable or the API may be having trouble.';
-    button.disabled = false;
-  }
 }
 
-$('monke-search').addEventListener('input', renderMonkeMaps);
-$('monke-sort').addEventListener('change', renderMonkeMaps);
-$('monke-retry').addEventListener('click', loadMonkeMaps);
-$('monke-detail-close').addEventListener('click', closeMonkeDetails);
-$('monke-detail-download').addEventListener('click', () => {
-  if (MONKE_SELECTED_MAP) downloadMonkeMap(MONKE_SELECTED_MAP);
+async function loadMaps(options = {}) {
+    const quiet = Boolean(options.quiet);
+
+    if (!quiet) {
+        grid.innerHTML = '<div class="loading-panel">Loading maps from SkyeHub...</div>';
+        mapCount.textContent = "Loading maps...";
+        setStatus("Connecting to SkyeHub API...", "loading");
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/maps`, {
+            method: "GET",
+            headers: { "Accept": "application/json" },
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error(`API returned HTTP ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const mapsArray = findMapsArray(payload);
+
+        if (!mapsArray) {
+            console.error("Unexpected SkyeHub API response:", payload);
+            throw new Error("The API response did not contain a maps array.");
+        }
+
+        allMaps = mapsArray.map(normalizeMap);
+
+        /*
+         * Keep records with a name or a usable ID.
+         * Log the original response to make API field mismatches easier
+         * to diagnose without hiding real map records.
+         */
+        allMaps = allMaps.filter(map =>
+            map.id && !map.id.startsWith("unknown-") ||
+            map.name !== "Untitled map"
+        );
+
+        console.log("SkyeHub API payload:", payload);
+        console.log("Normalized maps:", allMaps);
+
+        if (allMaps.some(map =>
+            map.name === "Untitled map" ||
+            map.author === "Unknown creator"
+        )) {
+            console.warn(
+                "Some map properties could not be identified. " +
+                "Inspect the SkyeHub API payload and Normalized maps in DevTools."
+            );
+        }
+
+        renderMaps();
+
+        const success = getValue(payload, [
+            "Success", "success", "ok", "OK"
+        ]);
+
+        if (success === false) {
+            setStatus("API returned an unsuccessful response", "error");
+        } else {
+            setStatus("Connected to SkyeHub", "ok");
+        }
+
+        if (!quiet) {
+            console.info(`Loaded ${allMaps.length} maps from SkyeHub.`);
+        }
+
+    } catch (error) {
+        console.error("Could not load SkyeHub maps:", error);
+
+        setStatus("Could not connect to API", "error");
+
+        if (!quiet) {
+            grid.innerHTML = "";
+
+            const panel = document.createElement("div");
+            panel.className = "error-panel";
+
+            const heading = document.createElement("strong");
+            heading.textContent = "Couldn't load the maps";
+
+            const message = document.createElement("p");
+            message.textContent =
+                `${error.message}. Check your connection and the API URL, then try again.`;
+
+            const retry = document.createElement("button");
+            retry.className = "btn btn-primary";
+            retry.textContent = "Retry";
+            retry.addEventListener("click", () => loadMaps());
+
+            panel.append(heading, message, retry);
+            grid.appendChild(panel);
+
+            mapCount.textContent = "Maps unavailable";
+            countDetail.textContent = "";
+        }
+    }
+}
+
+searchInput.addEventListener("input", renderMaps);
+sortSelect.addEventListener("change", renderMaps);
+
+document.getElementById("modal-close").addEventListener("click", closeDetails);
+document.getElementById("modal-close-bottom").addEventListener("click", closeDetails);
+
+document.getElementById("modal-download").addEventListener("click", event => {
+    if (selectedMap) {
+        downloadMap(selectedMap, event.currentTarget);
+    }
 });
 
-loadMonkeMaps();
+modal.addEventListener("click", event => {
+    if (event.target === modal) closeDetails();
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeDetails();
+});
+
+loadMaps();
 </script>
 </body>
 </html>
-```
