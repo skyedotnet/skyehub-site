@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EverGlow Help Center: account deletion, account settings, and support contact information.">
+<title>EverGlow Support - SkyeHub</title>
+<style>
+body { background-color:#181818; background-image:linear-gradient(to bottom,#181818,#131313 220px,#181818 220px); background-repeat:repeat-x; color:#e8e8e8; font:x-small sans-serif; margin:0; padding:0; direction:ltr; }
+#globalWrapper { font-size:127%; width:100%; margin:0; padding:0; }
+#column-content { float:right; margin:0 0 .6em -12.2em; width:100%; }
+.mw-body { margin:2.8em 0 0 12.2em; border:1px solid #3a3a3a; background:#1f1f1f; color:#e8e8e8; padding:1em; line-height:1.5em; }
+#firstHeading { font-size:188%; font-weight:normal; border-bottom:1px solid #4a4a4a; padding-bottom:.17em; margin:0 0 .6em; overflow:hidden; line-height:1.2em; }
+#siteSub { font-size:84%; line-height:1.2em; margin:0 0 1.4em 1em; color:#a8a8a8; }
+h2 { font-size:150%; font-weight:normal; border-bottom:1px solid #4a4a4a; margin:1em 0 .6em; padding-bottom:.17em; overflow:hidden; }
+h3 { font-size:128%; font-weight:bold; border:0; margin-bottom:.3em; }
+p { margin:.4em 0 .5em; }
+a { color:#6ab0f3; text-decoration:none; background:none; }
+a:visited { color:#b39ddb; }
+a:hover,a:focus { text-decoration:underline; }
+ul { list-style-type:square; margin:.3em 0 0 1.6em; padding:0; }
+li { margin-bottom:.1em; }
+hr { height:1px; color:#4a4a4a; background-color:#4a4a4a; border:0; margin:.2em 0; }
+#column-one { padding-top:160px; float:none; width:11.6em; }
+#p-logo { position:absolute; z-index:3; top:0; left:0; height:155px; width:12.2em; overflow:hidden; background:#181818; }
+.portlet { border:0; margin:0 0 .5em; padding:0; float:none; width:11.6em; overflow:hidden; }
+.portlet h3 { font-size:91%; font-weight:normal; text-transform:lowercase; padding:0 1em 0 .5em; background:transparent; display:inline; height:1em; white-space:nowrap; border:0; margin:0; }
+.pBody { background-color:#1f1f1f; border:1px solid #3a3a3a; padding:0 .8em .3em .5em; font-size:95%; color:#e8e8e8; border-collapse:collapse; }
+.pBody ul { list-style-type:square; line-height:1.5em; font-size:95%; margin:.3em 0 0 1.2em; padding:0; }
+.pBody li { padding:0; margin:0; }
+#footer { background-color:#181818; border-top:1px solid #fabd23; border-bottom:1px solid #fabd23; margin:.6em 0 1em; overflow:hidden; padding:.4em 0 .3em; text-align:center; font-size:90%; clear:both; }
+.visualClear { clear:both; }
+.search { margin:.8em 0 1.2em; }
+.search input { font:inherit; padding:4px; border:1px solid #4a4a4a; background:#181818; color:#e8e8e8; max-width:75%; width:350px; }
+.search button { font:inherit; padding:4px 10px; border:1px solid #3a3a3a; background:#2a2a2a; color:#e8e8e8; cursor:pointer; }
+.categories { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1em; }
+.category { border:1px solid #3a3a3a; padding:.6em; background:#1f1f1f; }
+.category h3 { margin:.2em 0 .5em; }
+.category ul { margin:.3em 0 0 1.6em; }
+.article { padding-top:.4em; }
+.notice { border:1px solid #3a3a3a; padding:.6em; margin:.7em 0; }
+.breadcrumbs { font-size:84%; color:#a8a8a8; margin-bottom:.6em; }
+[hidden] { display:none!important; }
+@media screen and (min-width:551px) { #column-content { float:right; margin:0 0 .6em -12.2em; } .mw-body { margin:2.8em 0 0 12.2em; border-right:0; } #column-one { padding-top:160px; } }
+@media screen and (max-width:550px) { #column-content { float:none; margin:0; } .mw-body { margin:0; border-left:0; border-right:0; } #column-one { display:none; } .categories { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div id="globalWrapper">
+  <div id="column-content">
+    <div class="mw-body" role="main">
 
+    <div class="breadcrumbs"><a href="https://www.skyehub.org/">SkyeHub</a> &gt; EverGlow Support</div>
+    <h1 id="firstHeading">EverGlow Support</h1>
+    <div id="siteSub">Help Center · Account settings, privacy, and support</div>
+    <p>Welcome to the EverGlow Help Center. Browse the topics below for help with your account and app settings.</p>
+    <form class="search" id="help-search" role="search">
+      <input id="search-input" type="search" placeholder="Search help topics..." aria-label="Search help topics">
+      <button type="submit">Search</button>
+    </form>
+    <p id="search-status" role="status" hidden></p>
+    <div class="categories" id="categories">
+      <section class="category" data-search="account management delete account password sign in">
+        <h3 id="account">Account Management</h3>
+        <ul><li><a href="#account-deletion">How to delete your EverGlow account</a></li><li><a href="#cant-access">Can't access your account?</a></li></ul>
+      </section>
+      <section class="category" data-search="app settings notifications settings">
+        <h3 id="settings">App Settings</h3>
+        <ul><li><a href="#notifications">Notification settings</a></li><li><a href="#account-deletion">Account deletion in Settings</a></li></ul>
+      </section>
+      <section class="category" data-search="privacy data deletion remove messages profile">
+        <h3 id="privacy">Privacy &amp; Data</h3>
+        <ul><li><a href="#data-deletion">What happens when I delete my account?</a></li><li><a href="#cant-access">Request deletion by email</a></li></ul>
+      </section>
+      <section class="category" data-search="contact email support help questions">
+        <h3>Contact Support</h3>
+        <ul><li><a href="#contact">Email EverGlow Support</a></li><li><a href="#cant-access">Account deletion requests</a></li></ul>
+      </section>
+    </div>
+
+    <h2>Help Articles</h2>
+    <section class="article" id="account-deletion">
+      <h3>How to delete your EverGlow account</h3>
+      <p>You can permanently delete your EverGlow account from within the app.</p>
+      <ol>
+        <li>Open <strong>EverGlow</strong> and sign in.</li>
+        <li>Open <strong>Settings</strong>.</li>
+        <li>Press and hold <strong>Delete Account</strong> for <strong>10 seconds</strong>.</li>
+        <li>When prompted, confirm that you want to delete your account.</li>
+        <li>Enter your account password to verify your identity.</li>
+        <li>Confirm the deletion to finish.</li>
+      </ol>
+      <div class="notice"><strong>Important:</strong> Account deletion is permanent and cannot be undone.</div>
+    </section>
+    <section class="article" id="cant-access">
+      <h3>Can't access the app?</h3>
+      <p>You can request account deletion without opening EverGlow. Email <a href="mailto:skye@skyehub.org?subject=EverGlow%20Account%20Deletion">skye@skyehub.org</a> with the subject <strong>EverGlow Account Deletion</strong>.</p>
+      <p><strong>You must send the deletion request from the same email address you used to create your EverGlow account.</strong> This helps us identify your account. We may ask you to verify account ownership before processing the request. <strong>Never send your password by email.</strong></p>
+    </section>
+    <section class="article" id="data-deletion">
+      <h3>What happens to my data?</h3>
+      <p>Deleting your account is intended to remove your account and associated profile information, friendships, messages you sent, and related account data. Some data may remain temporarily if cleanup is incomplete or in backups, and messages sent by other people are not part of your account deletion.</p>
+      <p>For questions about deletion status or retained data, contact <a href="mailto:skye@skyehub.org?subject=EverGlow%20Data%20Deletion">skye@skyehub.org</a>.</p>
+    </section>
+    <section class="article" id="notifications">
+      <h3>Notification settings</h3>
+      <p>Open EverGlow's <strong>Settings</strong> page to adjust the notification options available in the app.</p>
+    </section>
+    <section class="article" id="contact">
+      <h3>Contact EverGlow Support</h3>
+      <p>For questions or account issues, email <a href="mailto:skye@skyehub.org">skye@skyehub.org</a>. For account deletion requests, <strong>email us from the same address used to create your EverGlow account.</strong> Do not include your password.</p>
+    </section>
+    </div>
+  </div>
+  <div id="column-one">
+    <div id="p-logo"><a href="https://www.skyehub.org/"><img src="https://raw.githubusercontent.com/skyedotnet/skyehub-site/main/e013afa080be3fc497199251a32e3af4.jpg" alt="SkyeHub" style="width:12.2em;height:155px;object-fit:cover;display:block;"></a></div>
+    <div class="portlet"><h3>Navigation</h3><div class="pBody"><ul>
+      <li><a href="https://www.skyehub.org/">Main page</a></li>
+      <li><a href="everglow-support.html">EverGlow Support</a></li>
+      <li><a href="#account-deletion">Delete account</a></li>
+      <li><a href="#contact">Contact support</a></li>
+    </ul></div></div>
+    <div class="portlet"><h3>EverGlow</h3><div class="pBody"><ul>
+      <li><a href="#account">Account Management</a></li>
+      <li><a href="#settings">App Settings</a></li>
+      <li><a href="#privacy">Privacy &amp; Data</a></li>
+    </ul></div></div>
+  </aside>
+  </div>
+  <div class="visualClear"></div>
+  <div id="footer">SkyeHub &nbsp;·&nbsp; <a href="https://www.skyehub.org/">skyehub.org</a> &nbsp;·&nbsp; EverGlow Support</div>
+</div>
+<script>
+(function () {
+  const form = document.getElementById('help-search');
+  const input = document.getElementById('search-input');
+  const status = document.getElementById('search-status');
+  const cards = Array.from(document.querySelectorAll('.category'));
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const term = input.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach(function (card) {
+      const match = !term || (card.textContent + ' ' + card.dataset.search).toLowerCase().includes(term);
+      card.hidden = !match;
+      if (match) shown++;
+    });
+    status.hidden = !term;
+    status.textContent = shown ? shown + ' help categories found.' : 'No matching help categories found.';
+  });
+  input.addEventListener('input', function () {
+    if (input.value.trim() === '') {
+      cards.forEach(function (card) { card.hidden = false; });
+      status.hidden = true;
+    }
+  });
+})();
+</script>
+</body>
+</html>
